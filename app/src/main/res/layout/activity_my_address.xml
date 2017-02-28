@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_my_address"
+    android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.threededge.project1.MyAddressActivity">
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/app_bar"
-        />
-<ListView
-    android:id="@+id/address_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/tool_bar">
+    android:background="@color/White"
+    tools:context="com.threededge.project1.FavouritePageActivity">
+    <RelativeLayout
 
-</ListView>
-</RelativeLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/tool_bar_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/app_bar"
+            >
+
+        </include>
+
+    </RelativeLayout>
+        <Button
+            android:id="@+id/add_address"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:text="add"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:textColor="@color/White"
+            android:background="@color/Black"/>
+        <ListView
+
+            android:id="@+id/address_list"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tool_bar_layout"
+            android:layout_height="match_parent"
+            >
+
+        </ListView>
+    </RelativeLayout>
+
+
+
+    <com.threededge.project1.component.CustomNavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header" />
+</android.support.v4.widget.DrawerLayout>

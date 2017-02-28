@@ -1,4 +1,4 @@
-package component;
+package com.threededge.project1.component;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import com.threededge.project1.R;
 
 import java.util.List;
 
-import DataObject.Address;
+import com.threededge.project1.DataObject.Address;
 
 /**
  * Created by beyond on 24-Feb-17.
@@ -55,12 +55,13 @@ public class AddressListAdapter extends BaseAdapter {
         userCity=(TextView) convertView.findViewById(R.id.city_text);
         userPhone=(TextView) convertView.findViewById(R.id.phone_text);
         userPostalcode=(TextView) convertView.findViewById(R.id.postal_code_text);
+
         userName.setText(addresses.get(position).getUserName());
         userAddress.setText(addresses.get(position).getUserAddress());
         userCity.setText(addresses.get(position).getUserCity());
         userPhone.setText(addresses.get(position).getUserPhone());
         userPostalcode.setText(addresses.get(position).getUserPostalCode());
 
-        return null;
+        return convertView;
     }
 }

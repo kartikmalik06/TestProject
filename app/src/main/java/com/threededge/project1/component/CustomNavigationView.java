@@ -1,4 +1,4 @@
-package component;
+package com.threededge.project1.component;
 
 import android.content.Context;
 import android.support.design.widget.NavigationView;
@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 
 import com.threededge.project1.BaseActivity;
 import com.threededge.project1.R;
-import com.threededge.project1.userauth.AuthanticationController;
 
 /**
  * Created by beyond on 23-Feb-17.

@@ -1,11 +1,10 @@
 package com.threededge.project1;
 
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import component.SwipableViewPager;
-import component.ViewpagerAdapter;
+import com.threededge.project1.component.SwipableViewPager;
+import com.threededge.project1.component.ViewpagerAdapter;
 
 public class MyOrderPageActivity extends BaseActivity {
     private TabLayout tabLayout;

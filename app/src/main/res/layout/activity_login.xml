@@ -36,7 +36,7 @@
             android:layout_margin="@dimen/_5sdp"
             android:orientation="vertical">
 
-            <component.CustomEditText
+            <com.threededge.project1.component.CustomEditText
                 android:id="@+id/email_text"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
@@ -48,7 +48,7 @@
                 android:textColor="@color/White"
                 android:textSize="@dimen/_15sdp" />
 
-            <component.CustomEditText
+            <com.threededge.project1.component.CustomEditText
                 android:id="@+id/password_text"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
@@ -135,7 +135,7 @@
         </LinearLayout>
     </LinearLayout>
     </RelativeLayout>
-    <component.CustomNavigationView
+    <com.threededge.project1.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

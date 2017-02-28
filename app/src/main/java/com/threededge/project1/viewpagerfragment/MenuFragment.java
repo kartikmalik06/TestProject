@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import com.threededge.project1.R;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import component.ExpandableListBaseAdapter;
+import com.threededge.project1.component.ExpandableListBaseAdapter;
 
 /**
  * Created by beyond on 23-Feb-17.

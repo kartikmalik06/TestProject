@@ -1,4 +1,4 @@
-package network;
+package com.threededge.project1.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,4 +1,4 @@
-package component;
+package com.threededge.project1.component;
 
 import android.content.Context;
 import android.graphics.Typeface;

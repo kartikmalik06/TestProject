@@ -1,14 +1,12 @@
 package com.threededge.project1;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import component.CustomEditText;
+import com.threededge.project1.component.CustomEditText;
 
 public class ProfilePageActivity extends BaseActivity implements View.OnClickListener {
     private TextView userName, userEmail, userPhone, userDOB;

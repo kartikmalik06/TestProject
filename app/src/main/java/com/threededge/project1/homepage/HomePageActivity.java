@@ -7,7 +7,7 @@ import android.widget.Button;
 import com.threededge.project1.BaseActivity;
 import com.threededge.project1.R;
 
-import component.CustomEditText;
+import com.threededge.project1.component.CustomEditText;
 
 public class HomePageActivity extends BaseActivity implements View.OnClickListener {
 

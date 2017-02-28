@@ -1,19 +1,15 @@
 package com.threededge.project1.userauth;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.threededge.project1.BaseActivity;
 import com.threededge.project1.R;
-import com.threededge.project1.database.DatabaseHandler;
 import com.threededge.project1.homepage.HomePageActivity;
 
-import component.CustomEditText;
+import com.threededge.project1.component.CustomEditText;
 
 public class SignupActivity extends BaseActivity implements View.OnClickListener {
     CustomEditText name, email, phoneNumber, password, confirmPassword;

@@ -16,10 +16,10 @@
     <string name="your_e_mail_id">"  Your E-mail id"</string>
     <string name="phone">" Phone"</string>
     <string name="confirm_password">" Confirm Password"</string>
-    <string name="name">Name :</string>
-    <string name="address">Address:</string>
-    <string name="city">City :</string>
-    <string name="phone_no">Phone :</string>
-    <string name="postal_code">Postal code:</string>
+    <string name="name">"Name :"</string>
+    <string name="address">"Address :"</string>
+    <string name="city">"City :"</string>
+    <string name="phone_no">"Phone :"</string>
+    <string name="postal_code">"Postal code :"</string>
     <string name="enter_your_postcode">" Enter your postcode"</string>
 </resources>

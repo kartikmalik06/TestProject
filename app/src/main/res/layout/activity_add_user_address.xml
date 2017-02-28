@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_forgot_password"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.threededge.project1.AddUserAddressActivity">
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/app_bar"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/tool_bar_layout"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/White"
+        android:layout_marginTop="@dimen/_20sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="NAME :"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+
+            <com.threededge.project1.component.CustomEditText
+                android:id="@+id/name_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textColor="@color/White"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:alpha="0.5"
+                android:background="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="Address :"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+
+            <com.threededge.project1.component.CustomEditText
+                android:id="@+id/address_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textColor="@color/White"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:alpha="0.5"
+                android:background="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="City :"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+
+            <com.threededge.project1.component.CustomEditText
+                android:id="@+id/city_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textColor="@color/White"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:alpha="0.5"
+                android:background="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="Phone :"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+
+            <com.threededge.project1.component.CustomEditText
+                android:id="@+id/phone_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textColor="@color/White"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:alpha="0.5"
+                android:background="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="Postal Code :"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+
+            <com.threededge.project1.component.CustomEditText
+                android:id="@+id/postal_code_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textColor="@color/White"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:alpha="0.5"
+                android:background="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        </LinearLayout>
+
+<Button
+    android:id="@+id/submit_address"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="SUBMIT"
+    android:textColor="@color/White"
+    android:background="@color/Black"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingLeft="@dimen/_20sdp"
+    android:paddingRight="@dimen/_20sdp"
+    android:paddingBottom="@dimen/_5sdp"
+    android:textSize="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>

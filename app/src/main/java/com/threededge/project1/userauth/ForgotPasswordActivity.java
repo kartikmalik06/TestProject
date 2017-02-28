@@ -4,16 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.threededge.project1.BaseActivity;
 import com.threededge.project1.R;
 
-import component.CustomEditText;
+import com.threededge.project1.component.CustomEditText;
 
 public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
     private CustomEditText emailId;

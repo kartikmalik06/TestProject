@@ -1,10 +1,14 @@
-package DataObject;
+package com.threededge.project1.DataObject;
+
+import android.os.Parcelable;
+
+import java.io.Serializable;
 
 /**
  * Created by beyond on 24-Feb-17.
  */
 
-public class Address {
+public class Address implements Serializable {
     String userName,userAddress,userCity,userPhone,userPostalCode;
 
     public String getUserName() {

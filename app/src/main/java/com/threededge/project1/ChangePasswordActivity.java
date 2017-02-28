@@ -1,14 +1,11 @@
 package com.threededge.project1;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.sql.BatchUpdateException;
-
-import component.CustomEditText;
+import com.threededge.project1.component.CustomEditText;
 
 public class ChangePasswordActivity extends BaseActivity implements View.OnClickListener {
     CustomEditText oldPassword, newPassword, confirmPassword;

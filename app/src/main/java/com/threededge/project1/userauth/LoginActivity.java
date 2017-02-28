@@ -1,15 +1,12 @@
 package com.threededge.project1.userauth;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +14,7 @@ import com.threededge.project1.BaseActivity;
 import com.threededge.project1.R;
 import com.threededge.project1.homepage.HomePageActivity;
 
-import component.CustomEditText;
+import com.threededge.project1.component.CustomEditText;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     CustomEditText emailId, password;

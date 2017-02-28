@@ -25,7 +25,7 @@ import com.threededge.project1.userauth.SignupActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import component.CustomNavigationView;
+import com.threededge.project1.component.CustomNavigationView;
 
 /**
  * Created by beyond on 24-Feb-17.

@@ -17,18 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MyOrderPageActivity" />
+        <activity android:name=".MyOrderPageActivity" />
         <activity android:name=".userauth.LoginActivity" />
         <activity android:name=".userauth.SignupActivity" />
-        <activity android:name=".userauth.ForgotPasswordActivity" android:parentActivityName=".userauth.LoginActivity">
-
-        </activity>
+        <activity
+            android:name=".userauth.ForgotPasswordActivity"
+            android:parentActivityName=".userauth.LoginActivity"></activity>
         <activity android:name=".MyAddressActivity" />
         <activity android:name=".ProfilePageActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".ReviewPageActivity" />
-        <activity android:name=".FavouritePageActivity"></activity>
+        <activity android:name=".FavouritePageActivity" />
+        <activity android:name=".AddUserAddressActivity" android:parentActivityName=".MyAddressActivity"></activity>
     </application>
 
 </manifest>
