@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    tools:context="com.threededge.project1.homepage.HomePageActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/app_bar"
+            />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="@string/create_account"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="serif"
+            android:gravity="center|top"
+            android:text="Please enter your details given below"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <component.CustomEditText
+            android:id="@+id/name_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/Black"
+            android:hint="@string/your_name"
+            android:textColor="@color/White"
+            android:alpha="0.7"
+            android:textColorHint="@color/White"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:textSize="@dimen/_15sdp" />
+        <component.CustomEditText
+            android:id="@+id/email_text"
+            android:layout_width="match_parent"
+            android:textColorHint="@color/White"
+            android:layout_height="@dimen/_30sdp"
+            android:textColor="@color/White"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/Black"
+            android:hint="@string/enter_email_id"
+            android:alpha="0.7"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:textSize="@dimen/_15sdp" />
+        <component.CustomEditText
+            android:id="@+id/phone_no_text"
+            android:layout_width="match_parent"
+            android:textColorHint="@color/White"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/Black"
+            android:textColor="@color/White"
+            android:hint="@string/phone"
+            android:alpha="0.7"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:textSize="@dimen/_15sdp" />
+        <component.CustomEditText
+            android:id="@+id/password_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:alpha="0.7"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:textColorHint="@color/White"
+            android:inputType="textPassword"
+            android:background="@color/Black"
+            android:textColor="@color/White"
+            android:hint="@string/enter_your_password"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:textSize="@dimen/_15sdp" />
+        <component.CustomEditText
+            android:id="@+id/confirm_pass_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:textColorHint="@color/White"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:textColor="@color/White"
+            android:alpha="0.7"
+            android:inputType="textPassword"
+            android:background="@color/Black"
+            android:hint="@string/confirm_password"
+            android:textSize="@dimen/_15sdp" />
+        <Button
+            android:id="@+id/sign_up_button"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:textColor="@color/White"
+            android:text="Sign up"
+            android:layout_gravity="center"
+            android:padding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textSize="@dimen/_20sdp"
+            android:background="@color/Black"/>
+
+    </LinearLayout>
+
+
+    </RelativeLayout>
+    <component.CustomNavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header"
+        />
+
+</android.support.v4.widget.DrawerLayout>

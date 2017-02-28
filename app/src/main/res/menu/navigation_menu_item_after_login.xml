@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/find_restaurent"
+        android:title="Find reastaurent" />
+    <item
+        android:id="@+id/profile"
+        android:title="View Profile" />
+    <item
+        android:id="@+id/my_address"
+        android:title="My Address" />
+    <item
+        android:id="@+id/my_order"
+        android:title="My order" />
+    <item
+        android:id="@+id/change_password"
+        android:title="Change Password" />
+    <item
+        android:id="@+id/favourites"
+        android:title="My Favourites" />
+    <item
+        android:id="@+id/reviews"
+        android:title="My Reviews" />
+    <item
+        android:id="@+id/log_out"
+        android:title="Log Out" />
+
+</menu>
