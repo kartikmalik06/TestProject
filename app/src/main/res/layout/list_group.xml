@@ -7,6 +7,10 @@
         android:id="@+id/group_lable"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
+        android:background="@color/Black"
+        android:textColor="@color/White"
+        android:alpha="0.5"
+        android:textSize="@dimen/_20sdp"
         android:text="food"/>
 
 </LinearLayout>

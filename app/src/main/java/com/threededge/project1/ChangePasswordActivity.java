@@ -31,7 +31,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         super.buttonAnimation(chnagePassword);
         if (oldPassword.isFieldEmpty() && newPassword.isFieldEmpty() && confirmPassword.isFieldEmpty()) {
-            if (newPassword.getText().equals(confirmPassword.getText())) {
+            if (newPassword.getText().toString().equals(confirmPassword.getText().toString())) {
                 //need to add server call
                 Toast.makeText(this, "PASSWORD CHANGED", Toast.LENGTH_SHORT).show();
             }

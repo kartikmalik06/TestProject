@@ -10,6 +10,7 @@ import android.widget.EditText;
  */
 
 public class CustomEditText extends EditText {
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public CustomEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -22,5 +23,17 @@ public class CustomEditText extends EditText {
             return false;
         }
         return true;
+    }
+
+    public boolean isVaildEmail()
+    {
+        if (getText().toString().matches(emailPattern))
+        {
+            return true;
+        }
+        else {
+            setError("Not vaild Email address");
+            return false;
+        }
     }
 }

@@ -41,7 +41,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         if ((name.isFieldEmpty()&&email.isFieldEmpty()&&
                 phoneNumber.isFieldEmpty()&&
                 password.isFieldEmpty()&&
-                confirmPassword.isFieldEmpty())) {
+                confirmPassword.isFieldEmpty()&&email.isVaildEmail())) {
             /*DatabaseHandler databaseHandler=new DatabaseHandler(this);
             databaseHandler.addUserInfo(name.getText().toString(),true);*/
             super.setLoginStatus(true);

@@ -74,6 +74,7 @@
             android:layout_width="match_parent"
             android:textColorHint="@color/White"
             android:layout_height="@dimen/_30sdp"
+            android:digits="0123456789"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@color/Black"
             android:textColor="@color/White"

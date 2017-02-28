@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.sign_in_btn:
                 signIn.startAnimation(animation);
-                if ((emailId.isFieldEmpty() && password.isFieldEmpty())) {
+                if ((emailId.isFieldEmpty() && password.isFieldEmpty())&&emailId.isVaildEmail()) {
                     emailId.getText();
                     password.getText().toString();
                     //need to add webservice call to sign in

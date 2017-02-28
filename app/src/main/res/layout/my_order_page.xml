@@ -5,78 +5,88 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     tools:context="com.threededge.project1.MyOrderPageActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/app_bar"
-        />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tool_bar"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/app_bar" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tool_bar"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_100sdp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/restaurent_name"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:fontFamily="sans-serif"
-                    android:text="Amar Punjabi Dhaba"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/_20sdp"
-                    android:textStyle="bold" />
+                    android:layout_height="@dimen/_100sdp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/food_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:gravity="bottom"
-                    android:text="Indian"
-                    android:textSize="@dimen/_15sdp" />
+                    <TextView
+                        android:id="@+id/restaurent_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:fontFamily="sans-serif"
+                        android:text="Amar Punjabi Dhaba"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/food_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:gravity="bottom"
+                        android:text="Indian"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/restaurent_image"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:src="@mipmap/ic_launcher" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/restaurent_image"
-                android:layout_width="@dimen/_90sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/_8sdp"
-                android:src="@mipmap/ic_launcher"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:alpha="0.8"
+                    app:tabBackground="@color/colorPrimary"
+                    app:tabSelectedTextColor="#8c7327"
+                    app:tabTextAppearance="@style/TabLayoutTextStyle"
+                    app:tabTextColor="@color/Black" />
+
+                <com.threededge.project1.component.SwipableViewPager
+                    android:id="@+id/restaurent_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tabs" />
+
+            </RelativeLayout>
         </LinearLayout>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp" />
 
-        <com.threededge.project1.component.SwipableViewPager
-            android:id="@+id/restaurent_info"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/tabs"
-            android:layout_height="match_parent" />
+    </RelativeLayout>
 
-</RelativeLayout>
-    </LinearLayout>
-
-</RelativeLayout>
     <com.threededge.project1.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

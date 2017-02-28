@@ -1,6 +1,7 @@
 package com.threededge.project1.component;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,10 +76,10 @@ public class ExpandableListBaseAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
 
-        TextView lblListHeader = (TextView) convertView
+        TextView listHeader = (TextView) convertView
                 .findViewById(R.id.group_lable);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
+        listHeader.setTypeface(null, Typeface.BOLD);
+        listHeader.setText(headerTitle);
 
         return convertView;
 
@@ -98,6 +99,7 @@ public class ExpandableListBaseAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.items);
 
         txtListChild.setText(childText);
+
         return convertView;
     }
 

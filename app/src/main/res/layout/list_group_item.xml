@@ -8,5 +8,9 @@
         android:layout_height="@dimen/_30sdp"
         android:gravity="left"
         android:layoutDirection="ltr"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="@color/Black"
+        android:alpha="0.7"
+        android:background="@color/White"
         android:text="Pizzaa"/>
 </LinearLayout>
