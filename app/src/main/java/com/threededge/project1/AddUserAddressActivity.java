@@ -12,6 +12,8 @@ import com.threededge.project1.DataObject.Address;
 import com.threededge.project1.component.CustomEditText;
 
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AddUserAddressActivity extends AppCompatActivity implements View.OnClickListener {
     private CustomEditText userName, userAddress, userCity, userPhone, userPostalCode;
@@ -20,6 +22,7 @@ public class AddUserAddressActivity extends AppCompatActivity implements View.On
     private TextView toolBarTitle;
     private Address addressholder;
     private Intent intent;
+    private int clickedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +30,21 @@ public class AddUserAddressActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_add_user_address);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolBarTitle = (TextView) findViewById(R.id.title_name);
-
         userName = (CustomEditText) findViewById(R.id.name_text);
         userAddress = (CustomEditText) findViewById(R.id.address_text);
         userCity = (CustomEditText) findViewById(R.id.city_text);
         userPhone = (CustomEditText) findViewById(R.id.phone_text);
         userPostalCode = (CustomEditText) findViewById(R.id.postal_code_text);
-
         submitButton = (Button) findViewById(R.id.submit_address);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+
+            addressholder = (Address) bundle.getSerializable("AddresstoEdit");
+            clickedPosition = bundle.getInt("position");
+
+            setPreviousDetailstoEdit(addressholder);
+        }
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -42,6 +52,15 @@ public class AddUserAddressActivity extends AppCompatActivity implements View.On
         toolBarTitle.setText("Add Address");
         submitButton.setOnClickListener(this);
 
+    }
+
+    public void setPreviousDetailstoEdit(Address addressholder) {
+
+        userName.setText(addressholder.getUserName().toString());
+        userAddress.setText(addressholder.getUserAddress().toString());
+        userCity.setText(addressholder.getUserCity().toString());
+        userPhone.setText(addressholder.getUserPhone().toString());
+        userPostalCode.setText(addressholder.getUserPostalCode().toString());
     }
 
     @Override
@@ -57,6 +76,10 @@ public class AddUserAddressActivity extends AppCompatActivity implements View.On
             Bundle bundle = new Bundle();
             intent = new Intent(getApplicationContext(), MyAddressActivity.class);
             bundle.putSerializable("Address", addressholder);
+            if (clickedPosition != -1) {
+                bundle.putString("position", String.valueOf(clickedPosition));
+            }
+
             intent.putExtras(bundle);
             startActivity(intent);
         }

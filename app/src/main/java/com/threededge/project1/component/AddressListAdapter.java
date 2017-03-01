@@ -1,12 +1,18 @@
 package com.threededge.project1.component;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.threededge.project1.AddUserAddressActivity;
+import com.threededge.project1.MyAddressActivity;
 import com.threededge.project1.R;
 
 import java.util.List;
@@ -17,13 +23,18 @@ import com.threededge.project1.DataObject.Address;
  * Created by beyond on 24-Feb-17.
  */
 
-public class AddressListAdapter extends BaseAdapter {
+public class AddressListAdapter extends BaseAdapter implements View.OnClickListener {
     List<Address> addresses;
     Context context;
-    TextView userName,userAddress,userCity,userPhone,userPostalcode;
-    public AddressListAdapter(Context context,List<Address> addresses) {
-        this.context=context;
-        this.addresses=addresses;
+    TextView userName, userAddress, userCity, userPhone, userPostalcode;
+    ImageView editaddress, deleteaddress;
+    Intent intent;
+    int currentPosition;
+    Bundle bundle;
+
+    public AddressListAdapter(Context context, List<Address> addresses) {
+        this.context = context;
+        this.addresses = addresses;
 
     }
 
@@ -50,11 +61,14 @@ public class AddressListAdapter extends BaseAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.address_list_item, null);
         }
-        userName=(TextView) convertView.findViewById(R.id.name_text);
-        userAddress=(TextView) convertView.findViewById(R.id.address_text);
-        userCity=(TextView) convertView.findViewById(R.id.city_text);
-        userPhone=(TextView) convertView.findViewById(R.id.phone_text);
-        userPostalcode=(TextView) convertView.findViewById(R.id.postal_code_text);
+        userName = (TextView) convertView.findViewById(R.id.name_text);
+        userAddress = (TextView) convertView.findViewById(R.id.address_text);
+        userCity = (TextView) convertView.findViewById(R.id.city_text);
+        userPhone = (TextView) convertView.findViewById(R.id.phone_text);
+        userPostalcode = (TextView) convertView.findViewById(R.id.postal_code_text);
+
+        editaddress = (ImageView) convertView.findViewById(R.id.edit_address);
+        deleteaddress = (ImageView) convertView.findViewById(R.id.delete_address);
 
         userName.setText(addresses.get(position).getUserName());
         userAddress.setText(addresses.get(position).getUserAddress());
@@ -62,6 +76,38 @@ public class AddressListAdapter extends BaseAdapter {
         userPhone.setText(addresses.get(position).getUserPhone());
         userPostalcode.setText(addresses.get(position).getUserPostalCode());
 
+        editaddress.setTag(position);
+        editaddress.setOnClickListener(this);
+        deleteaddress.setTag(position);
+        deleteaddress.setOnClickListener(this);
         return convertView;
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.edit_address:
+                currentPosition = (int) v.getTag();
+                intent = new Intent(context, AddUserAddressActivity.class);
+                bundle = new Bundle();
+                bundle.putSerializable("AddresstoEdit", addresses.get(currentPosition));
+                bundle.putInt("position", currentPosition);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+                break;
+
+            case R.id.delete_address:
+                currentPosition = (int) v.getTag();
+                intent = new Intent(context, MyAddressActivity.class);
+                bundle = new Bundle();
+                bundle.putString("position", String.valueOf(currentPosition));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+                break;
+
+        }
+    }
+
+
 }

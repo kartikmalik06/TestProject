@@ -18,6 +18,7 @@ public class MyAddressActivity extends BaseActivity implements View.OnClickListe
     private static List<Address> userAddresses=new ArrayList<Address>();
     private Button addAddress;
     private Intent intent;
+    private String clickedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +29,28 @@ public class MyAddressActivity extends BaseActivity implements View.OnClickListe
         addressList = (ListView) findViewById(R.id.address_list);
         addAddress=(Button) findViewById(R.id.add_address);
         Bundle b=this.getIntent().getExtras();
+
         if (b!=null) {
             Address addressHolder = (Address) b.getSerializable("Address");
-            //need to call webservice for user address
+            clickedPosition = b.getString("position");
+            if (addressHolder != null) {
+                //need to call webservice for user address
 
-            userAddresses.add(addressHolder);
+                if (clickedPosition !=null) {
+                    userAddresses.remove(Integer.parseInt(clickedPosition));
+                    userAddresses.add(Integer.parseInt(clickedPosition), addressHolder);
+                } else {
+                    userAddresses.add(addressHolder);
+                }
+
+
+            }
+            else {
+
+                if (clickedPosition !=null) {
+                    userAddresses.remove(Integer.parseInt(clickedPosition));
+                }
+            }
         }
 
             //must call before setDisplayHomeAsUpEnabled function

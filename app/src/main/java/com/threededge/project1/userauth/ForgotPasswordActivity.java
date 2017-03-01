@@ -29,6 +29,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         submit = (Button) findViewById(R.id.submit_btn);
         submit.setOnClickListener(this);
         setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle("");
         toolBarTitle.setText("Forgot Password");
         //must call before setDisplayHomeAsUpEnabled function
         //  super.setActionBarTitle("SIGN IN");

@@ -1,10 +1,12 @@
 package com.threededge.project1.homepage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.threededge.project1.BaseActivity;
+import com.threededge.project1.MyOrderPageActivity;
 import com.threededge.project1.R;
 
 import com.threededge.project1.component.CustomEditText;
@@ -14,6 +16,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
     private CustomEditText postalCode;
     private Button findStore;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         if(postalCode.isFieldEmpty())
         {
 
-            //need to add server call
+            //need to add server call to get restaurents list according to postal code
+
+            intent=new Intent(getApplicationContext(), MyOrderPageActivity.class);
+            //put restaurents lists
+            startActivity(intent);
         }
     }
 }
