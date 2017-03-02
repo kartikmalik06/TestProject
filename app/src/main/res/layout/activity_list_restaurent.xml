@@ -29,7 +29,7 @@
 
 
 
-    <com.threededge.digitalfood.component.CustomNavigationView
+    <com.app.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

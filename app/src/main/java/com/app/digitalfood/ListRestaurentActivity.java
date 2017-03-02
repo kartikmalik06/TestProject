@@ -35,7 +35,7 @@ public class ListRestaurentActivity extends BaseActivity implements AdapterView.
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //need to call webservice to get restaurent info
-        intent=new Intent(getApplicationContext(),RestaurentDetailPage.class);
+        intent=new Intent(getApplicationContext(),MyOrderPageActivity.class);
         //put restaurent info
         startActivity(intent);
 

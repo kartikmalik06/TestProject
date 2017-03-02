@@ -24,62 +24,65 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/restaurent_name"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_height="fill_parent"
                         android:fontFamily="sans-serif"
-                        android:text="Amar Punjabi Dhaba"
+                        android:text="Amar Punjabi"
+                        android:maxLength="30"
+                        android:minHeight="@dimen/_70sdp"
+                        android:maxWidth="@dimen/_200sdp"
+                        android:minWidth="@dimen/_180sdp"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/_20sdp"
+                        android:textSize="@dimen/_25sdp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/food_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="@dimen/_10sdp"
                         android:gravity="bottom"
                         android:text="Indian"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_17sdp" />
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/restaurent_image"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_gravity="center"
-                    android:layout_margin="@dimen/_8sdp"
                     android:src="@mipmap/ic_launcher" />
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="fill_parent">
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="wrap_content"
                     android:alpha="0.8"
                     app:tabBackground="@color/colorPrimary"
                     app:tabSelectedTextColor="#8c7327"
                     app:tabTextAppearance="@style/TabLayoutTextStyle"
                     app:tabTextColor="@color/Black" />
 
-                <com.threededge.digitalfood.component.SwipableViewPager
+                <com.app.digitalfood.component.SwipableViewPager
                     android:id="@+id/restaurent_info"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
                     android:layout_below="@+id/tabs" />
 
             </RelativeLayout>
@@ -87,7 +90,7 @@
 
     </RelativeLayout>
 
-    <com.threededge.digitalfood.component.CustomNavigationView
+    <com.app.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
