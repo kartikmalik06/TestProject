@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.threededge.project1.ReviewPageActivity">
+    tools:context="com.app.digitalfood.ReviewPageActivity">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,7 +17,7 @@
 </RelativeLayout>
 
 
-    <com.threededge.project1.component.CustomNavigationView
+    <com.threededge.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

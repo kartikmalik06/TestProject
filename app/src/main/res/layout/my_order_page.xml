@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.threededge.project1.MyOrderPageActivity">
+    tools:context="com.app.digitalfood.MyOrderPageActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     app:tabTextAppearance="@style/TabLayoutTextStyle"
                     app:tabTextColor="@color/Black" />
 
-                <com.threededge.project1.component.SwipableViewPager
+                <com.threededge.digitalfood.component.SwipableViewPager
                     android:id="@+id/restaurent_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -87,7 +87,7 @@
 
     </RelativeLayout>
 
-    <com.threededge.project1.component.CustomNavigationView
+    <com.threededge.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

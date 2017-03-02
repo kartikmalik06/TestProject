@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.threededge.project1.homepage.HomePageActivity">
+    tools:context="com.app.digitalfood.homepage.HomePageActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -50,7 +50,7 @@
                 android:padding="@dimen/_5sdp"
                 android:src="@mipmap/location_icon" />
 
-            <com.threededge.project1.component.CustomEditText
+            <com.threededge.digitalfood.component.CustomEditText
                 android:id="@+id/postcode"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
@@ -77,7 +77,7 @@
             android:textSize="@dimen/_20sdp" />
     </LinearLayout>
     </RelativeLayout>
-    <com.threededge.project1.component.CustomNavigationView
+    <com.threededge.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

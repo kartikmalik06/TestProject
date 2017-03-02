@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.threededge.project1.FavouritePageActivity">
+    tools:context="com.app.digitalfood.FavouritePageActivity">
     <RelativeLayout
 
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
 
 
 
-    <com.threededge.project1.component.CustomNavigationView
+    <com.threededge.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

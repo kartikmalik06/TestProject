@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.threededge.project1.ProfilePageActivity">
+    tools:context="com.app.digitalfood.ProfilePageActivity">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -88,7 +88,7 @@
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
 
-                <com.threededge.project1.component.CustomEditText
+                <com.threededge.digitalfood.component.CustomEditText
                     android:id="@+id/updated_name"
                     android:layout_width="@dimen/_180sdp"
                     android:layout_height="match_parent"
@@ -136,7 +136,7 @@
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
 
-                <com.threededge.project1.component.CustomEditText
+                <com.threededge.digitalfood.component.CustomEditText
                     android:id="@+id/updated_email"
                     android:layout_width="@dimen/_180sdp"
                     android:layout_height="match_parent"
@@ -184,7 +184,7 @@
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
 
-                <com.threededge.project1.component.CustomEditText
+                <com.threededge.digitalfood.component.CustomEditText
                     android:id="@+id/updated_phone"
                     android:layout_width="@dimen/_180sdp"
                     android:layout_height="match_parent"
@@ -233,7 +233,7 @@
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
 
-                <com.threededge.project1.component.CustomEditText
+                <com.threededge.digitalfood.component.CustomEditText
                     android:id="@+id/updated_dob"
                     android:layout_width="@dimen/_180sdp"
                     android:layout_height="match_parent"
@@ -278,7 +278,7 @@
     </LinearLayout>
 
 </RelativeLayout>
-    <com.threededge.project1.component.CustomNavigationView
+    <com.threededge.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
