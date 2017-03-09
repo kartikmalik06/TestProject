@@ -1,4 +1,4 @@
-package com.app.digitalfood.component;
+package com.app.digitalfood.activities.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.app.digitalfood.DataObject.Restaurent;
-import com.threededge.digitalfood.R;
+import com.app.digitalfood.R;
+
 
 import java.util.List;
 

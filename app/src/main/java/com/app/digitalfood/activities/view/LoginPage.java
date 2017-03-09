@@ -1,4 +1,4 @@
-package com.app.digitalfood.userauth;
+package com.app.digitalfood.activities.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,26 +10,35 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.digitalfood.BaseActivity;
+import com.app.digitalfood.R;
+import com.app.digitalfood.activities.BaseActivity;
+import com.app.digitalfood.activities.controllers.iLoginController;
+import com.app.digitalfood.activities.view.interfaces.iLogin;
 import com.app.digitalfood.component.CustomEditText;
-import com.app.digitalfood.homepage.HomePageActivity;
-import com.threededge.digitalfood.R;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
-    CustomEditText emailId, password;
-    Button signIn;
-    TextView createAccount, forgotPassword;
-    CheckBox rememberMe;
-    Intent intent;
+
+/**
+ * Created by kartik on 03-Mar-17.
+ */
+
+public class LoginPage extends BaseActivity implements View.OnClickListener, iLogin {
+    private CustomEditText emailId, password;
+    private Button signIn;
+    private TextView createAccount, forgotPassword;
+    private CheckBox rememberMe;
+    private Intent intent;
     private Animation animation;
+    private iLoginController iLoginController;
+    private boolean loginStatus=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         super.onCreateDrawer();
-        //filed decalaration
 
+        //filed decalaration
         emailId = (CustomEditText) findViewById(R.id.email_text);
         password = (CustomEditText) findViewById(R.id.password_text);
         signIn = (Button) findViewById(R.id.sign_in_btn);
@@ -40,12 +49,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         //must call before setDisplayHomeAsUpEnabled function
         super.setActionBarTitle("Sign In");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         //button animation
         animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
+
+        //controller object
+//        iLoginController = new LoginController(this);
+
         //on click listeners
         signIn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -54,14 +71,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.sign_in_btn:
                 signIn.startAnimation(animation);
-                if ((emailId.isFieldEmpty() && password.isFieldEmpty())&&emailId.isVaildEmail()) {
-                    emailId.getText();
-                    password.getText().toString();
-                    //need to add webservice call to sign in
+                if ((emailId.isFieldEmpty() && password.isFieldEmpty()) && emailId.isVaildEmail()) {
+                   // iLoginController.login(emailId.getText().toString(), password.getText().toString());
                     if (isSignInSuccessfull()) {
                         // set login status to true
                         super.setLoginStatus(true);
-                        intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                        intent = new Intent(getApplicationContext(), HomePage.class);
                         startActivity(intent);
                         break;
                     } else {
@@ -72,11 +87,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.new_user:
-                intent = new Intent(getApplicationContext(), SignupActivity.class);
+                intent = new Intent(getApplicationContext(), Signup.class);
                 startActivity(intent);
                 break;
             case R.id.forgot_password:
-                intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                intent = new Intent(getApplicationContext(), ForgotPassword.class);
                 startActivity(intent);
                 break;
         }
@@ -84,7 +99,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-    private boolean isSignInSuccessfull() {
-        return true;
+    @Override
+    public boolean isSignInSuccessfull() {
+
+        return loginStatus;
+    }
+
+    public void setLoginStatus(boolean status)
+    {
+        loginStatus=status;
     }
 }

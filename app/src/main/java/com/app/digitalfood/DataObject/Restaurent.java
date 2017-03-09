@@ -1,12 +1,17 @@
 package com.app.digitalfood.DataObject;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * Created by beyond on 02-Mar-17.
  */
 public class Restaurent implements Serializable {
-    private String restaurentName,restaurentType;
+    @SerializedName("name")
+    private String restaurentName;
+    @SerializedName("type")
+    private String restaurentType;
    // private Image restaurentImage;
 
     public String getRestaurentName() {

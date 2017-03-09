@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
     public static Retrofit getService() {
         Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("").
+                baseUrl("http://192.168.56.1:8080/digitalfood/back-end/api/").
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
         return retrofit;

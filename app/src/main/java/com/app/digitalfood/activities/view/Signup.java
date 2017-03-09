@@ -1,16 +1,17 @@
-package com.app.digitalfood.userauth;
+package com.app.digitalfood.activities.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.app.digitalfood.BaseActivity;
+import com.app.digitalfood.R;
+import com.app.digitalfood.activities.BaseActivity;
+import com.app.digitalfood.activities.view.interfaces.iSignup;
 import com.app.digitalfood.component.CustomEditText;
-import com.app.digitalfood.homepage.HomePageActivity;
-import com.threededge.digitalfood.R;
 
-public class SignupActivity extends BaseActivity implements View.OnClickListener {
+
+public class Signup extends BaseActivity implements iSignup, View.OnClickListener {
     CustomEditText name, email, phoneNumber, password, confirmPassword;
     Button submit;
     Intent intent;
@@ -45,7 +46,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
             databaseHandler.addUserInfo(name.getText().toString(),true);*/
             super.setLoginStatus(true);
             //get all edit text value
-            intent = new Intent(getApplicationContext(), HomePageActivity.class);
+            intent = new Intent(getApplicationContext(), HomePage.class);
             startActivity(intent);
         }
     }

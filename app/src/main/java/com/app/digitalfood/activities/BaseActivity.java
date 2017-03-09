@@ -1,4 +1,4 @@
-package com.app.digitalfood;
+package com.app.digitalfood.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,17 +18,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.digitalfood.R;
+import com.app.digitalfood.activities.view.ChangePassword;
+import com.app.digitalfood.activities.view.FavouritePage;
+import com.app.digitalfood.activities.view.HomePage;
+import com.app.digitalfood.activities.view.MyAddress;
+import com.app.digitalfood.activities.view.OrderPage;
+import com.app.digitalfood.activities.view.ProfilePage;
+import com.app.digitalfood.activities.view.ReviewPage;
 import com.app.digitalfood.component.CustomNavigationView;
-import com.app.digitalfood.homepage.HomePageActivity;
-import com.app.digitalfood.userauth.LoginActivity;
-import com.app.digitalfood.userauth.SignupActivity;
-import com.threededge.digitalfood.R;
+import com.app.digitalfood.activities.view.LoginPage;
+import com.app.digitalfood.activities.view.Signup;
+import com.app.digitalfood.component.CustomProgressDialog;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by beyond on 24-Feb-17.
+ * Created by kartik on 24-Feb-17.
  */
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,13 +48,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     TextView toolBarTitle;
     private Animation animation;
     private Toolbar toolbar;
-
+    protected CustomProgressDialog pd;
 
     protected void onCreateDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mCustomNavigationView = (CustomNavigationView) findViewById(R.id.navigation_view);
-        toolbar=(Toolbar)  findViewById(R.id.tool_bar);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
         toolBarTitle = (TextView) findViewById(R.id.title_name);
         setSupportActionBar(toolbar);
@@ -55,6 +63,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         mActionBarDrawerToggle.syncState();
         animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
         mCustomNavigationView.setNavigationItemSelectedListener(this);
+        pd=new CustomProgressDialog(this);
     }
 
     @Override
@@ -72,22 +81,22 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         int v = item.getItemId();
         switch (v) {
             case R.id.find_restaurent:
-                intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
                 break;
 
             case R.id.login:
-                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent = new Intent(getApplicationContext(), LoginPage.class);
                 startActivity(intent);
                 break;
 
             case R.id.registration:
-                intent = new Intent(getApplicationContext(), SignupActivity.class);
+                intent = new Intent(getApplicationContext(), Signup.class);
                 startActivity(intent);
                 break;
 
             case R.id.my_order:
-                intent = new Intent(getApplicationContext(), MyOrderPageActivity.class);
+                intent = new Intent(getApplicationContext(), OrderPage.class);
                 startActivity(intent);
                 break;
 
@@ -96,33 +105,33 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.profile:
-                intent = new Intent(getApplicationContext(), ProfilePageActivity.class);
+                intent = new Intent(getApplicationContext(), ProfilePage.class);
                 startActivity(intent);
                 break;
 
             case R.id.my_address:
-                intent = new Intent(getApplicationContext(), MyAddressActivity.class);
+                intent = new Intent(getApplicationContext(), MyAddress.class);
                 startActivity(intent);
                 break;
 
             case R.id.change_password:
-                intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                intent = new Intent(getApplicationContext(), ChangePassword.class);
                 startActivity(intent);
                 break;
 
             case R.id.favourites:
-                intent = new Intent(getApplicationContext(), FavouritePageActivity.class);
+                intent = new Intent(getApplicationContext(), FavouritePage.class);
                 startActivity(intent);
                 break;
 
             case R.id.reviews:
-                intent = new Intent(getApplicationContext(), ReviewPageActivity.class);
+                intent = new Intent(getApplicationContext(), ReviewPage.class);
                 startActivity(intent);
                 break;
 
             case R.id.log_out:
                 setLoginStatus(false);
-                intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
                 break;
         }
@@ -146,11 +155,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public void buttonAnimation(Button button) {
         button.startAnimation(animation);
     }
+
     //must call before setDisplayHomeAsUpEnabled function
     public void setActionBarTitle(String title) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_title);
-
         toolBarTitle.setText(title);
     }
 

@@ -1,4 +1,4 @@
-package com.app.digitalfood.component;
+package com.app.digitalfood.activities.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.digitalfood.AddUserAddressActivity;
-import com.app.digitalfood.DataObject.Address;
-import com.app.digitalfood.MyAddressActivity;
-import com.threededge.digitalfood.R;
+import com.app.digitalfood.R;
+import com.app.digitalfood.activities.view.AddAddress;
+import com.app.digitalfood.activities.view.MyAddress;
+
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class AddressListAdapter extends BaseAdapter implements View.OnClickListener {
-    List<Address> addresses;
+    List<com.app.digitalfood.DataObject.Address> addresses;
     Context context;
     TextView userName, userAddress, userCity, userPhone, userPostalcode;
     ImageView editaddress, deleteaddress;
@@ -30,7 +30,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
     int currentPosition;
     Bundle bundle;
 
-    public AddressListAdapter(Context context, List<Address> addresses) {
+    public AddressListAdapter(Context context, List<com.app.digitalfood.DataObject.Address> addresses) {
         this.context = context;
         this.addresses = addresses;
     }
@@ -69,7 +69,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
 
         userName.setText(addresses.get(position).getUserName());
         userAddress.setText(addresses.get(position).getUserAddress());
-        userCity.setText(addresses.get(position).getUserCity());
+        //userCity.setText(addresses.get(position).getUserCity());
         userPhone.setText(addresses.get(position).getUserPhone());
         userPostalcode.setText(addresses.get(position).getUserPostalCode());
 
@@ -86,7 +86,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
 
             case R.id.edit_address:
                 currentPosition = (int) v.getTag();
-                intent = new Intent(context, AddUserAddressActivity.class);
+                intent = new Intent(context, AddAddress.class);
                 bundle = new Bundle();
                 bundle.putSerializable("AddresstoEdit", addresses.get(currentPosition));
                 bundle.putInt("position", currentPosition);
@@ -96,7 +96,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
 
             case R.id.delete_address:
                 currentPosition = (int) v.getTag();
-                intent = new Intent(context, MyAddressActivity.class);
+                intent = new Intent(context, MyAddress.class);
                 bundle = new Bundle();
                 bundle.putString("position", String.valueOf(currentPosition));
                 intent.putExtras(bundle);

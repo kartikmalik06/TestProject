@@ -4,7 +4,7 @@
     android:id="@+id/activity_forgot_password"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.app.digitalfood.AddUserAddressActivity">
+    tools:context="com.app.digitalfood.activities.view.AddAddress">
     <RelativeLayout
         android:id="@+id/tool_bar_layout"
         android:layout_width="match_parent"

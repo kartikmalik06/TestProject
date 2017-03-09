@@ -1,4 +1,4 @@
-package com.app.digitalfood.viewpagerfragment;
+package com.app.digitalfood.activities.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.threededge.digitalfood.R;
+import com.app.digitalfood.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ReviewFragment.OnFragmentInteractionListener} interface
+ * {@link ReviewFragment.OnFragmentInteractionListener} interfaces
  * to handle interaction events.
  * Use the {@link ReviewFragment#newInstance} factory method to
  * create an instance of this fragment.

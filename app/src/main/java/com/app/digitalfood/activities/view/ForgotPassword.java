@@ -1,4 +1,4 @@
-package com.app.digitalfood.userauth;
+package com.app.digitalfood.activities.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.app.digitalfood.R;
+import com.app.digitalfood.activities.view.interfaces.iForgotPassword;
 import com.app.digitalfood.component.CustomEditText;
-import com.threededge.digitalfood.R;
 
-public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class ForgotPassword extends AppCompatActivity implements iForgotPassword, View.OnClickListener {
     private CustomEditText emailId;
     private Button submit;
     private Intent intent;

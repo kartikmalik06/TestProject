@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.threededge.digitalfood">
+    package="com.app.digitalfood">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,29 +10,29 @@
         android:label="TakeAway"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.threededge.com.app.digitalfood.homepage.HomePageActivity">
+        <activity android:name=".activities.view.HomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.threededge.com.app.digitalfood.MyOrderPageActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.userauth.LoginActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.userauth.SignupActivity" />
+        <activity android:name=".activities.view.OrderPage" />
+        <activity android:name=".activities.view.LoginPage" />
+        <activity android:name=".activities.view.Signup" />
         <activity
-            android:name="com.threededge.com.app.digitalfood.userauth.ForgotPasswordActivity"
-            android:parentActivityName="com.threededge.com.app.digitalfood.userauth.LoginActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.MyAddressActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.ProfilePageActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.ChangePasswordActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.ReviewPageActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.FavouritePageActivity" />
+            android:name=".activities.view.ForgotPassword"
+            android:parentActivityName=".activities.view.LoginPage" />
+        <activity android:name=".activities.view.MyAddress" />
+        <activity android:name=".activities.view.ProfilePage" />
+        <activity android:name=".activities.view.ChangePassword" />
+        <activity android:name=".activities.view.ReviewPage" />
+        <activity android:name=".activities.view.FavouritePage" />
         <activity
-            android:name="com.threededge.com.app.digitalfood.AddUserAddressActivity"
-            android:parentActivityName="com.threededge.com.app.digitalfood.MyAddressActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.ListRestaurentActivity" />
-        <activity android:name="com.threededge.com.app.digitalfood.RestaurentDetailPage"></activity>
+            android:name=".activities.view.AddAddress"
+            android:parentActivityName=".activities.view.MyAddress" />
+        <activity android:name=".activities.view.ListRestaurent" />
+
     </application>
 
 </manifest>

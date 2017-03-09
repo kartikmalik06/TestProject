@@ -1,13 +1,23 @@
 package com.app.digitalfood.DataObject;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
- * Created by beyond on 24-Feb-17.
+ * Created by kartik on 24-Feb-17.
  */
 
 public class Address implements Serializable {
-    String userName,userAddress,userCity,userPhone,userPostalCode;
+    @SerializedName("name")
+    private String userName;
+    @SerializedName("address")
+    private String userAddress;
+    //private String userCity;
+    @SerializedName("phone")
+    private String userPhone;
+    @SerializedName("postcode")
+    private String userPostalCode;
 
     public String getUserName() {
         return userName;
@@ -25,14 +35,14 @@ public class Address implements Serializable {
         this.userAddress = userAddress;
     }
 
-    public String getUserCity() {
+   /* public String getUserCity() {
         return userCity;
     }
 
     public void setUserCity(String userCity) {
         this.userCity = userCity;
     }
-
+*/
     public String getUserPhone() {
         return userPhone;
     }

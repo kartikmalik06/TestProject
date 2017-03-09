@@ -4,8 +4,9 @@ import android.content.Context;
 import android.support.design.widget.NavigationView;
 import android.util.AttributeSet;
 
-import com.app.digitalfood.BaseActivity;
-import com.threededge.digitalfood.R;
+import com.app.digitalfood.R;
+import com.app.digitalfood.activities.BaseActivity;
+
 
 /**
  * Created by beyond on 23-Feb-17.
