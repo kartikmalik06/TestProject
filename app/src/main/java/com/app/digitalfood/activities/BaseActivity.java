@@ -12,9 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,7 @@ import com.app.digitalfood.activities.view.ReviewPage;
 import com.app.digitalfood.component.CustomNavigationView;
 import com.app.digitalfood.activities.view.LoginPage;
 import com.app.digitalfood.activities.view.Signup;
-import com.app.digitalfood.component.CustomProgressDialog;
+import com.app.digitalfood.component.LoadingView;
 
 
 import java.util.Timer;
@@ -39,31 +41,43 @@ import java.util.TimerTask;
  * Created by kartik on 24-Feb-17.
  */
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private CustomNavigationView mCustomNavigationView;
+    private ImageView closeImage;
     private Intent intent;
     private int backPressedCount = 0;
     TextView toolBarTitle;
     private Animation animation;
     private Toolbar toolbar;
-    protected CustomProgressDialog pd;
+    protected LoadingView pd;
 
     protected void onCreateDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mCustomNavigationView = (CustomNavigationView) findViewById(R.id.navigation_view);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+        closeImage = (ImageView) findViewById(R.id.im_close);
         toolBarTitle = (TextView) findViewById(R.id.title_name);
+        mDrawerLayout.addDrawerListener(this);
+       // mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+       // mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         setSupportActionBar(toolbar);
         mCustomNavigationView.getMenu().clear();
         mCustomNavigationView.setMenuItem(this);
         mActionBarDrawerToggle.syncState();
         animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
         mCustomNavigationView.setNavigationItemSelectedListener(this);
-        pd=new CustomProgressDialog(this);
+        closeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mDrawerLayout.closeDrawer(mCustomNavigationView);
+                closeImage.setVisibility(View.GONE);
+            }
+        });
+        pd = new LoadingView(this);
     }
 
     @Override
@@ -130,7 +144,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.log_out:
-                setLoginStatus(false);
+                updateLoginStatus(false);
+                //erase all login states
                 intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
                 break;
@@ -140,7 +155,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public void setLoginStatus(boolean Login) {
+    public void updateLoginStatus(boolean Login) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         pref.edit().putBoolean("IS_LOGGED_IN", Login).commit();
     }
@@ -186,6 +201,35 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
             }, 3000);
 
+        }
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+        if( newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == false )
+        {
+            closeImage.setVisibility(View.VISIBLE);
+        }
+        if( newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == true )
+        {
+            closeImage.setVisibility(View.GONE);
         }
     }
 }

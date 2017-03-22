@@ -5,4 +5,7 @@ package com.app.digitalfood.activities.view.interfaces;
  */
 
 public interface iHomePage {
+
+
+    void checkDeviceid(String deviceId);
 }

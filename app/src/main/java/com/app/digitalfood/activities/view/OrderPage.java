@@ -25,7 +25,7 @@ public class OrderPage extends BaseActivity implements iOrderPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_order_page);
+        setContentView(R.layout.check_out);
         super.onCreateDrawer();
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager = (SwipableViewPager) findViewById(R.id.restaurent_info);
@@ -34,7 +34,7 @@ public class OrderPage extends BaseActivity implements iOrderPage {
         mViewPager.setAdapter(adapter);
         selectedItem = new ArrayList<String>();
         //must call before setDisplayHomeAsUpEnabled function
-        super.setActionBarTitle("My Order");
+        super.setActionBarTitle("Checkout");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tabLayout.setupWithViewPager(mViewPager);
     }

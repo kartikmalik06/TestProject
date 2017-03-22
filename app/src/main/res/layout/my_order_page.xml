@@ -25,6 +25,7 @@
     android:layout_centerHorizontal="true"
     android:layout_alignParentRight="true"
     android:padding="@dimen/_5sdp"
+    android:visibility="gone"
     android:layout_marginRight="@dimen/_5sdp"
     android:src="@drawable/cart"/>
         <TextView
@@ -32,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/White"
+            android:visibility="gone"
             android:gravity="center"
             android:textSize="@dimen/_10sdp"
             android:padding="@dimen/_2sdp"

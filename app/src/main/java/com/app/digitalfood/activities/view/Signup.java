@@ -23,9 +23,9 @@ public class Signup extends BaseActivity implements iSignup, View.OnClickListene
         super.onCreateDrawer();
         name = (CustomEditText) findViewById(R.id.name_text);
         email = (CustomEditText) findViewById(R.id.email_text);
-        phoneNumber = (CustomEditText) findViewById(R.id.phone_no_text);
+        phoneNumber = (CustomEditText) findViewById(R.id.phone_text);
         password = (CustomEditText) findViewById(R.id.password_text);
-        confirmPassword = (CustomEditText) findViewById(R.id.confirm_pass_text);
+       // confirmPassword = (CustomEditText) findViewById(R.id.confirm_pass_text);
         submit = (Button) findViewById(R.id.sign_up_button);
 
         //must call before setDisplayHomeAsUpEnabled function
@@ -44,7 +44,7 @@ public class Signup extends BaseActivity implements iSignup, View.OnClickListene
                 confirmPassword.isFieldEmpty()&&email.isVaildEmail())) {
             /*DatabaseHandler databaseHandler=new DatabaseHandler(this);
             databaseHandler.addUserInfo(name.getText().toString(),true);*/
-            super.setLoginStatus(true);
+            super.updateLoginStatus(true);
             //get all edit text value
             intent = new Intent(getApplicationContext(), HomePage.class);
             startActivity(intent);

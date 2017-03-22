@@ -22,4 +22,7 @@
     <string name="phone_no">"Phone :"</string>
     <string name="postal_code">"Postal code :"</string>
     <string name="enter_your_postcode">" Enter your postcode"</string>
+    <string name="facebook_app_id">758924944265734</string>
+    <string name="fb_login_protocol_scheme">fb758924944265734</string>
+
 </resources>

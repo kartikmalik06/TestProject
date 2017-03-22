@@ -6,5 +6,6 @@ package com.app.digitalfood.activities.controllers;
 
 public interface iHomepageController {
 
+    boolean vailadateUser(String deviceId);
 
 }

@@ -1,13 +1,12 @@
 package com.app.digitalfood.activities.adapter;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.app.digitalfood.activities.view.OrderPage;
 import com.app.digitalfood.activities.view.fragment.MenuFragment;
-import com.app.digitalfood.activities.view.fragment.ReviewFragment;
+import com.app.digitalfood.activities.view.fragment.ShippingActivity;
 
 /**
  * Created by beyond on 23-Feb-17.
@@ -26,14 +25,12 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
 
         Fragment frag = null;
         switch (position) {
+
             case 0:
-                frag = new MenuFragment(context);
+                frag = new ShippingActivity();
                 break;
             case 1:
-                frag = new ReviewFragment();
-                break;
-            case 2:
-                frag = new ReviewFragment();
+                frag = new ShippingActivity();
                 break;
         }
         return frag;
@@ -41,7 +38,7 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -49,14 +46,12 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
         String title = " ";
         switch (position) {
             case 0:
-                title = "Menu";
+                title = "Billing and shipping details";
                 break;
             case 1:
-                title = "Review";
+                title = "Payment";
                 break;
-            case 2:
-                title = "Info";
-                break;
+
         }
 
         return title;
