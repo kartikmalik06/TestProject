@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/menu_logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/userProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_gravity="center"
             android:src="@mipmap/ic_launcher" />
 
@@ -37,14 +37,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_19sdp" />
 
             <TextView
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_13sdp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

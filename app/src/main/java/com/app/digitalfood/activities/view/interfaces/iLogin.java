@@ -1,5 +1,7 @@
 package com.app.digitalfood.activities.view.interfaces;
 
+import com.app.digitalfood.DataObject.LoginResult;
+
 import org.json.JSONObject;
 
 /**
@@ -8,7 +10,10 @@ import org.json.JSONObject;
 
 public interface iLogin {
 
-     boolean isSignInSuccessfull();
-     void setLoginStatus(boolean status);
-     void setUserData(JSONObject userData);
+
+    void setLoginStatus(boolean status);
+
+    void setFbUserData(JSONObject userData);
+
+    void setUserData(LoginResult loginResult);
 }

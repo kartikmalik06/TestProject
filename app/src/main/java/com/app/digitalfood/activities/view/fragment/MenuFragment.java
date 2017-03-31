@@ -13,6 +13,7 @@ import android.widget.ExpandableListView;
 
 import com.app.digitalfood.DataObject.CategoryGroup;
 import com.app.digitalfood.DataObject.Categoryitem;
+import com.app.digitalfood.DataObject.CategoryData;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.adapter.ExpandableListBaseAdapter;
 import com.app.digitalfood.activities.view.OrderPage;
@@ -32,56 +33,31 @@ public class MenuFragment extends Fragment {
     ArrayList<CategoryGroup> listHeader;
     HashMap<CategoryGroup, List<Categoryitem>> listChild;
     private OrderPage orderPage;
-
+    List<CategoryData> menuList=new ArrayList<>();
     public MenuFragment() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-    public MenuFragment(OrderPage context) {
+    public MenuFragment(OrderPage orderPage,List<CategoryData> menuList) {
         super();
-        this.orderPage = context;
-    }
+        this.orderPage = orderPage;
+      this.menuList=menuList;
 
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment, container, false);
-        expandableListView = (ExpandableListView) view.findViewById(R.id.food_type);
-        Log.d("string","yes");
-         prepareListData();
-       /* MenuController mController = new MenuController(orderPage);
-        mController.getCategoryItem(5,7);*/
 
-        expandableListBaseAdapter = new ExpandableListBaseAdapter(getContext(), orderPage, listHeader, listChild);
-        expandableListView.setAdapter(expandableListBaseAdapter);
+            expandableListView = (ExpandableListView) view.findViewById(R.id.food_type);
+            Log.d("string", "yes");
+            expandableListView.setGroupIndicator(null);
+            expandableListBaseAdapter = new ExpandableListBaseAdapter(getContext(), orderPage, menuList);
+            expandableListView.setAdapter(expandableListBaseAdapter);
 
         return view;
-    }
-
-
-    //need to remove only for test purpose
-    private void prepareListData() {
-        listHeader = new ArrayList<CategoryGroup>();
-        listChild = new HashMap<CategoryGroup, List<Categoryitem>>();
-
-        for (int i = 0; i < 4; i++) {
-            CategoryGroup cg = new CategoryGroup();
-            cg.setName("Group " + i);
-            listHeader.add(cg);
-        }
-
-        for (int i = 0; i < 4; i++) {
-            List<Categoryitem> lstItem = new ArrayList<Categoryitem>();
-            for (int j = 0; j < 5; j++) {
-                Categoryitem ci = new Categoryitem();
-                ci.setItemName("Item " + j);
-                lstItem.add(ci);
-            }
-            listChild.put(listHeader.get(i), lstItem);
-        }
-
     }
 
 

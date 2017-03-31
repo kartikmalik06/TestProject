@@ -1,5 +1,9 @@
 package com.app.digitalfood.activities.view.interfaces;
 
+import com.app.digitalfood.DataObject.BranchType;
+
+import java.util.List;
+
 /**
  * Created by beyond on 07-Mar-17.
  */
@@ -8,4 +12,5 @@ public interface iHomePage {
 
 
     void checkDeviceid(String deviceId);
+    void setBranchList(List<BranchType> listBranch);
 }

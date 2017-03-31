@@ -1,60 +1,71 @@
 package com.app.digitalfood.activities.view;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.digitalfood.DataObject.BranchType;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.BaseActivity;
+import com.app.digitalfood.activities.adapter.CustomGrid;
 import com.app.digitalfood.activities.controllers.HomePageController;
-import com.app.digitalfood.activities.controllers.iHomepageController;
+import com.app.digitalfood.activities.controllers.IHomepageController;
 import com.app.digitalfood.activities.view.interfaces.iHomePage;
-import com.app.digitalfood.component.CustomEditText;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-
-public class HomePage extends BaseActivity implements iHomePage, View.OnClickListener {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
-    private CustomEditText postalCode;
-    private Button findStore;
+public class HomePage extends BaseActivity implements iHomePage {
+
+
     private Intent intent;
-    private iHomepageController iHomepageController;
+    private IHomepageController iHomepageController;
     private TextView userName, userEmail;
+    private EditText searchText;
     ImageView userProfile;
-    // GoogleMap map;
+    private GridView grid;
+    private List<BranchType> listBranch = new ArrayList<BranchType>();
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         super.onCreateDrawer();
         //DatabaseHandler databaseHandler=new DatabaseHandler(this);
-        //   final LatLng HAMBURG = new LatLng(53.558, 9.927);
 
-        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-        findStore = (Button) findViewById(R.id.search_btn);
-        postalCode = (CustomEditText) findViewById(R.id.postcode);
         userName = (TextView) findViewById(R.id.user_name);
         userEmail = (TextView) findViewById(R.id.user_email);
         userProfile = (ImageView) findViewById(R.id.userProfile);
-        getSupportActionBar().setTitle("");
+        searchText=(EditText) findViewById(R.id.searchtext);
+        searchText.setShowSoftInputOnFocus(false);
+        super.setActionBarTitle("Home Page");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         iHomepageController = new HomePageController(this);
-        checkDeviceid(android_id);
-        findStore.setOnClickListener(this);
-        Bundle b = getIntent().getExtras();
+        //  checkDeviceid(getDeviceId());
+        if (isLogin()) {
+            pd.showDialog();
+            iHomepageController.getGridViewData();
+            if (listBranch.size() != 0) {
+                initGridView();
+            }
+        } else {
+            intent = new Intent(getApplicationContext(), LoginPage.class);
+            startActivity(intent);
+
+        }
+       /* Bundle b = getIntent().getExtras();
         userName.setText(b.getString("name"));
         userEmail.setText(b.getString("email"));
         URL url = null;
@@ -69,7 +80,7 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
         } catch (IOException e) {
             e.printStackTrace();
         }
-        userProfile.setImageBitmap(bmp);
+        userProfile.setImageBitmap(bmp);*/
        /* map = ((MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
         Marker marker1 = map.addMarker(new MarkerOptions().position(HAMBURG));
@@ -83,23 +94,28 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
     }
 
 
-    @Override
-    public void onClick(View v) {
-        super.buttonAnimation(findStore);
-        pd.showDialog();
-        if (postalCode.isFieldEmpty()) {
-            if (isLogin()) {
+    /* @Override
+     public void onClick(View v) {
+         super.buttonAnimation(findStore);
+         pd.showDialog();
+         if (postalCode.isFieldEmpty()) {
+             if (isLogin()) {
 
 
-                //need to add server call to get restaurents list according to postal code
-              /*  intent = new Intent(getApplicationContext(), OrderPage.class);
+                 //need to add server call to get restaurents list according to postal code
+               *//*  intent = new Intent(getApplicationContext(), OrderPage.class);
                 //put restaurents lists
-                startActivity(intent);*/
+                startActivity(intent);*//*
             } else {
                 intent = new Intent(getApplicationContext(), LoginPage.class);
                 startActivity(intent);
             }
         }
+    }*/
+    @Override
+    public void setBranchList(List<BranchType> listBranch) {
+        this.listBranch = listBranch;
+        initGridView();
     }
 
     @Override
@@ -112,6 +128,26 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
             //need to add db clear command
 
         }
+    }
+
+    public void initGridView() {
+        CustomGrid adapter = new CustomGrid(this, listBranch);
+        grid = (GridView) findViewById(R.id.grid);
+        grid.setAdapter(adapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
+                Bundle b=new Bundle();
+               // b.putString("branch_id", String.valueOf(listBranch.get(position).getId()));
+                intent.putExtra("branch_id",String.valueOf(listBranch.get(position).getId()));
+                startActivity(intent);
+
+            }
+        });
+        pd.hideDialog();
     }
 }
 

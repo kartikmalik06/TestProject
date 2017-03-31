@@ -41,7 +41,6 @@
             android:paddingRight="@dimen/_20sdp">
 
             <LinearLayout
-                android:id="@+id/cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_25sdp"
@@ -49,10 +48,11 @@
                 android:gravity="center|top">
 
                 <ImageView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_cart" />
+                    android:src="@drawable/icon_cart"
+                    android:clickable="true"
+                    android:id="@+id/cart" />
 
             </LinearLayout>
 
@@ -60,18 +60,19 @@
                 android:id="@+id/cart_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_alignRight="@+id/cart"
-                android:layout_alignTop="@+id/cart"
+
                 android:background="@drawable/cart_count_background"
                 android:padding="@dimen/_3sdp"
                 android:textColor="@color/White"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone" />
+
             <ImageView
                 android:id="@+id/im_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:src="@drawable/icon_close"/>
+                android:src="@drawable/icon_close"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>

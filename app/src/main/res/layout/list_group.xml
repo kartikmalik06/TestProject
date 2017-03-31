@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/light_blue"
+    android:orientation="horizontal"
     android:weightSum="1">
+
     <TextView
         android:id="@+id/group_lable"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_30sdp"
-        android:textColor="@color/Black"
+        android:layout_height="@dimen/_45sdp"
         android:layout_weight="0.5"
-        android:paddingLeft="@dimen/_15sdp"
         android:gravity="center|left"
-        android:textSize="@dimen/_12sdp"
-        android:text="food"/>
+        android:paddingLeft="@dimen/_15sdp"
+        android:text="food"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/_12sdp" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:gravity="right"
-        android:paddingRight="@dimen/_20sdp"
-        android:paddingTop="@dimen/_3sdp"
+        android:layout_weight="0.5"
+        android:gravity="right|center"
         android:paddingBottom="@dimen/_3sdp"
-        android:layout_weight="0.5">
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:src="@drawable/icon_food"
-    />
+        android:paddingRight="@dimen/_20sdp"
+        android:paddingTop="@dimen/_3sdp">
+
+        <ImageView
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_food" />
     </LinearLayout>
 </LinearLayout>

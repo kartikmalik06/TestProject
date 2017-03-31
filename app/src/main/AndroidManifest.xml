@@ -18,7 +18,7 @@
             android:value="@string/facebook_app_id"/>
 
 
-        <activity android:name=".activities.view.LoginPage">
+        <activity android:name=".activities.view.HomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,7 +26,7 @@
         </activity>
 
         <activity android:name=".activities.view.OrderPage" />
-        <activity android:name=".activities.view.HomePage" />
+        <activity android:name=".activities.view.LoginPage" />
         <activity android:name=".activities.view.Signup" />
         <activity
             android:name=".activities.view.ForgotPassword"

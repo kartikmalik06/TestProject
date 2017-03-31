@@ -1,6 +1,6 @@
 package com.app.digitalfood.activities.modals;
 
-import com.app.digitalfood.DataObject.Login;
+import com.app.digitalfood.DataObject.LoginResult;
 import com.app.digitalfood.activities.controllers.iLoginController;
 import com.app.digitalfood.network.ApiService;
 import com.app.digitalfood.network.ServiceGenerator;
@@ -18,28 +18,33 @@ import retrofit2.Retrofit;
 public class ModalLogin implements iModalLogin {
     private iLoginController iLoginController;
     ApiService service;
+
     public ModalLogin(iLoginController iLoginController) {
         this.iLoginController = iLoginController;
-        Retrofit retrofit= ServiceGenerator.getService();
+        Retrofit retrofit = ServiceGenerator.getService();
         service = retrofit.create(ApiService.class);
     }
 
     @Override
-    public boolean authanticateUser(String userName, String password) {
-        final boolean[] result = new boolean[1];
-        Call<Login> call=service.matchUser(userName,password);
-        call.enqueue(new Callback<Login>() {
+    public void authanticateUser(String userName, String password, String deviceId, String deviceType) {
+        //final boolean[] result = new boolean[1];
+        Call<LoginResult> call = service.matchUser(userName, password, deviceId, deviceType);
+        call.enqueue(new Callback<LoginResult>() {
             @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
+            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 1) {
+                        iLoginController.onLoginSuccess(response.body());
+                    }
+                }
 
-                result[0] = response.body().isLogin();
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
+            public void onFailure(Call<LoginResult> call, Throwable t) {
 
             }
         });
-        return result[0];
+
     }
 }

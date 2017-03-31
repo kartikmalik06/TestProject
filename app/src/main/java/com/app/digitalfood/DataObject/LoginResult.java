@@ -2,21 +2,22 @@ package com.app.digitalfood.DataObject;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONObject;
 
 /**
- * Created by beyond on 29-Mar-17.
+ * Created by beyond on 03-Mar-17.
  */
 
-public class Branch {
+public class LoginResult {
+
+
 
     @SerializedName("status")
     int status;
     @SerializedName("message")
     String message;
     @SerializedName("data")
-    List<BranchType> data=new ArrayList<BranchType>();
+    LoginData data;
 
     public int getStatus() {
         return status;
@@ -26,7 +27,7 @@ public class Branch {
         return message;
     }
 
-    public List<BranchType> getData() {
+    public LoginData getData() {
         return data;
     }
 }

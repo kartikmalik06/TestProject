@@ -6,17 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by beyond on 29-Mar-17.
+ * Created by beyond on 30-Mar-17.
  */
-
-public class Branch {
-
+public class OfferResult {
     @SerializedName("status")
     int status;
     @SerializedName("message")
     String message;
     @SerializedName("data")
-    List<BranchType> data=new ArrayList<BranchType>();
+    List<OfferData> data=new ArrayList<OfferData>();
 
     public int getStatus() {
         return status;
@@ -26,7 +24,7 @@ public class Branch {
         return message;
     }
 
-    public List<BranchType> getData() {
+    public List<OfferData> getData() {
         return data;
     }
 }

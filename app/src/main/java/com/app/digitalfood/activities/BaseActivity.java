@@ -3,6 +3,7 @@ package com.app.digitalfood.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.digitalfood.DataObject.LoginResult;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.view.ChangePassword;
 import com.app.digitalfood.activities.view.FavouritePage;
@@ -49,6 +51,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private Intent intent;
     private int backPressedCount = 0;
     TextView toolBarTitle;
+    private TextView userName, userEmail;
     private Animation animation;
     private Toolbar toolbar;
     protected LoadingView pd;
@@ -61,8 +64,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         closeImage = (ImageView) findViewById(R.id.im_close);
         toolBarTitle = (TextView) findViewById(R.id.title_name);
         mDrawerLayout.addDrawerListener(this);
-       // mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
-       // mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        userEmail = (TextView) findViewById(R.id.user_name);
+        userName = (TextView) findViewById(R.id.user_name);
+        // mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+        // mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         setSupportActionBar(toolbar);
         mCustomNavigationView.getMenu().clear();
         mCustomNavigationView.setMenuItem(this);
@@ -162,7 +167,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     public boolean isLogin() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        boolean isLogin = pref.getBoolean("IS_LOGGED_IN", false);
+        boolean isLogin = pref.getBoolean("IS_LOGGED_IN", true);
         Log.d("login detail", String.valueOf(isLogin));
         return isLogin;
     }
@@ -223,13 +228,22 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onDrawerStateChanged(int newState) {
-        if( newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == false )
-        {
+        if (newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == false) {
             closeImage.setVisibility(View.VISIBLE);
         }
-        if( newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == true )
-        {
+        if (newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == true) {
             closeImage.setVisibility(View.GONE);
         }
+    }
+
+    public String getDeviceId() {
+        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return android_id;
+    }
+
+    public void setUserDetail(LoginResult loginResult) {
+
+        userName.setText(loginResult.getData().getFirstName() + " " + loginResult.getData().getLastName());
+        userEmail.setText(loginResult.getData().getEmail());
     }
 }

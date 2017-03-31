@@ -11,21 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.app.digitalfood.DataObject.LoginResult;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.BaseActivity;
 
+import com.app.digitalfood.activities.controllers.LoginController;
 import com.app.digitalfood.activities.controllers.iLoginController;
 import com.app.digitalfood.activities.view.interfaces.iLogin;
 import com.app.digitalfood.component.CustomEditText;
-import com.app.digitalfood.component.CustomVolleyRequest;
 import com.app.digitalfood.component.FbLogin;
 import com.app.digitalfood.component.GoogleSignIn;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 
 import org.json.JSONException;
@@ -64,7 +62,7 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
         initViews();
 
         //controller object
-      //  iLoginController = new LoginController(this);
+        iLoginController = new LoginController(this);
         //on click listeners
         signIn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
@@ -80,10 +78,10 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
             case R.id.sign_in_btn:
                 signIn.startAnimation(animation);
                 if ((emailId.isFieldEmpty() && password.isFieldEmpty()) && emailId.isVaildEmail()) {
-                    // iLoginController.login(emailId.getText().toString(), password.getText().toString());
-                    if (isSignInSuccessfull()) {
+
+                    iLoginController.login(emailId.getText().toString(), password.getText().toString(),super.getDeviceId(),"Android");
+                    if (isLogin()) {
                         // set login status to true
-                        super.updateLoginStatus(true);
                         intent = new Intent(getApplicationContext(), HomePage.class);
                         startActivity(intent);
                         break;
@@ -110,14 +108,12 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
     }
 
 
-    @Override
-    public boolean isSignInSuccessfull() {
-        return loginStatus;
-    }
+
 
     @Override
     public void setLoginStatus(boolean status) {
         loginStatus = status;
+        updateLoginStatus(status);
     }
 
 
@@ -161,7 +157,7 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
 
         } else {
             //If login fails
-            Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "LoginResult Failed", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -176,7 +172,7 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
         animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
     }
 
-    public void setUserData(JSONObject userData) {
+    public void setFbUserData(JSONObject userData) {
         try {
             userData.getString("name");
             Toast.makeText(this, userData.getString("name"), Toast.LENGTH_SHORT).show();
@@ -189,4 +185,11 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void setUserData(LoginResult loginResult) {
+        setUserDetail(loginResult);
+    }
+
+
 }

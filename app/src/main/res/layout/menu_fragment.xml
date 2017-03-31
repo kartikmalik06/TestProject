@@ -19,6 +19,8 @@
         android:indicatorLeft="@dimen/_250sdp"
         android:indicatorRight="@dimen/_320sdp"
         android:listSelector="@drawable/selector_list_item"
-        android:transcriptMode="normal"></ExpandableListView>
+        android:transcriptMode="normal">
+
+    </ExpandableListView>
 
 </LinearLayout>

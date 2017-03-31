@@ -1,113 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.app.digitalfood.activities.view.HomePage"
-    >
-<android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background"
-   >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    tools:context="com.app.digitalfood.activities.view.HomePage">
 
-        <include
-            android:id="@+id/tool_bar"
-            layout="@layout/app_bar" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_95sdp"
-        android:layout_below="@+id/tool_bar"
-        android:orientation="vertical"
-        android:weightSum="2">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_margin="@dimen/_5sdp"
-            android:layout_weight="0.11"
-            android:gravity="center|top"
-            android:text="Choose from over 1000's restaurents."
-            android:textColor="@color/Black"
-            android:typeface="serif"
-            android:textStyle="bold"
-            android:scaleY="1.5"
-            android:textSize="@dimen/_14sdp" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"
-            android:layout_weight="0.30"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="@dimen/_220sdp"
+            android:background="@drawable/menu_pic">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:alpha="0.5"
-                android:background="@color/Black"
-                android:padding="@dimen/_5sdp"
-                android:src="@mipmap/location_icon" />
-
-            <com.app.digitalfood.component.CustomEditText
-                android:id="@+id/postcode"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:background="@color/Black"
-                android:alpha="0.7"
-                android:hint="@string/enter_your_postcode"
-                android:textCursorDrawable="@color/White"
-                android:textColor="@color/White"
-                android:textColorHint="@color/White"
-                android:cursorVisible="true"
-                android:textSize="@dimen/_20sdp" />
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/app_bar" />
         </LinearLayout>
-       <!-- <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.google.android.gms.maps.MapFragment"/>-->
-        <Button
-            android:id="@+id/search_btn"
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_5sdp"
+            android:weightSum="1">
 
-            android:layout_gravity="center"
-            android:background="@color/Black"
-            android:fontFamily="serif"
-            android:text="@string/search"
-            android:textColor="@color/White"
-            android:textSize="@dimen/_20sdp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:paddingLeft="@dimen/_5sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:text="Company Name"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.4"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/_7sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_22sdp"
+            android:gravity="top"
+            android:paddingBottom="@dimen/_1sdp"
+            android:paddingLeft="@dimen/_7sdp"
+            android:paddingRight="@dimen/_7sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:text="hello,android:layout"
+            android:textSize="@dimen/_10sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_blue"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <com.app.digitalfood.component.CustomEditText
+                android:id="@+id/searchtext"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_weight="0.9"
+                android:hint="Search..."
+                android:textSize="@dimen/_10sdp"
+                android:inputType="text"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/search" />
+        </LinearLayout>
+
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:columnWidth="@dimen/_100sdp"
+                android:gravity="center"
+                android:numColumns="3"
+                android:stretchMode="columnWidth">
+
+            </GridView>
+
+
     </LinearLayout>
-    </RelativeLayout>
+
     <com.app.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/navigation_header"
-        />
+        app:headerLayout="@layout/navigation_header" />
 
 </android.support.v4.widget.DrawerLayout>
 
-    <ImageView
-        android:id="@+id/im_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:src="@drawable/cancel"
-        android:clickable="true"
-        android:visibility="gone"
-       />
-</RelativeLayout>

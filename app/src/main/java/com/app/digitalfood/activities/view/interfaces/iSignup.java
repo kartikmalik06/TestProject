@@ -5,4 +5,6 @@ package com.app.digitalfood.activities.view.interfaces;
  */
 
 public interface iSignup {
+
+     void setResult(boolean status);
 }
