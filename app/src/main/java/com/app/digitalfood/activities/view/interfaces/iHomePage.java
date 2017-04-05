@@ -12,5 +12,8 @@ public interface iHomePage {
 
 
     void checkDeviceid(String deviceId);
+
     void setBranchList(List<BranchType> listBranch);
+
+    void setDiscription(boolean expand);
 }

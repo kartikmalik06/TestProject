@@ -7,20 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.app.digitalfood.DataObject.Address;
 import com.app.digitalfood.R;
+import com.app.digitalfood.activities.view.Checkout;
 import com.app.digitalfood.component.CustomEditText;
 
 
-public class ShippingActivity extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+public class ShippingFragment extends Fragment implements View.OnClickListener {
     private CustomEditText name;
     private CustomEditText address;
     private CustomEditText city;
@@ -30,29 +23,15 @@ public class ShippingActivity extends Fragment implements View.OnClickListener {
     private Button proceed;
 
 
-    public ShippingActivity() {
+    public ShippingFragment() {
+
         // Required empty public constructor
     }
 
 
-    // TODO: Rename and change types and number of parameters
-    public static ShippingActivity newInstance(String param1, String param2) {
-        ShippingActivity fragment = new ShippingActivity();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 
     @Override
@@ -65,8 +44,7 @@ public class ShippingActivity extends Fragment implements View.OnClickListener {
         pincode = (CustomEditText) view.findViewById(R.id.pincode_text);
         phone = (CustomEditText) view.findViewById(R.id.phone_text);
         country = (CustomEditText) view.findViewById(R.id.country_text);
-        proceed=(Button) view.findViewById(R.id.btn_proceed);
-
+        proceed = (Button) view.findViewById(R.id.btn_proceed);
         proceed.setOnClickListener(this);
         return view;
     }
@@ -75,5 +53,30 @@ public class ShippingActivity extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.btn_proceed:
+                if (checkAllFields()) {
+                    Address address=new Address();
+                    address.setName(name.getText().toString());
+                    address.setAddress1(this.address.getText().toString());
+                    address.setCity(city.getText().toString());
+                    address.setPostcode(pincode.getText().toString());
+                    address.setCountry(country.getText().toString());
+                    ((Checkout)getActivity()).changefragment(address);
+                }
+        }
+
+    }
+
+    private boolean checkAllFields() {
+        if (name.isFieldEmpty() && address.isFieldEmpty()
+                && city.isFieldEmpty() && phone.isFieldEmpty()
+                && pincode.isFieldEmpty() && country.isFieldEmpty()) {
+            return true;
+
+        } else {
+
+            return false;
+        }
     }
 }

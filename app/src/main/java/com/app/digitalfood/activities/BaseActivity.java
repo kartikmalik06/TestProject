@@ -1,5 +1,6 @@
 package com.app.digitalfood.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -22,8 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.digitalfood.DataObject.LoginResult;
+import com.app.digitalfood.DataObject.SubCategoryData;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.view.ChangePassword;
+import com.app.digitalfood.activities.view.Checkout;
 import com.app.digitalfood.activities.view.FavouritePage;
 import com.app.digitalfood.activities.view.HomePage;
 import com.app.digitalfood.activities.view.MyAddress;
@@ -34,8 +37,12 @@ import com.app.digitalfood.component.CustomNavigationView;
 import com.app.digitalfood.activities.view.LoginPage;
 import com.app.digitalfood.activities.view.Signup;
 import com.app.digitalfood.component.LoadingView;
+import com.app.digitalfood.database.DatabaseHandler;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,46 +50,31 @@ import java.util.TimerTask;
  * Created by kartik on 24-Feb-17.
  */
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
+public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener, View.OnClickListener {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private CustomNavigationView mCustomNavigationView;
     private ImageView closeImage;
     private Intent intent;
+    static List<SubCategoryData> selectedItem;
     private int backPressedCount = 0;
-    TextView toolBarTitle;
+    private TextView toolBarTitle, itemCount;
     private TextView userName, userEmail;
     private Animation animation;
     private Toolbar toolbar;
-    protected LoadingView pd;
+    public LoadingView pd;
+    private ImageView cartButton;
 
     protected void onCreateDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        mCustomNavigationView = (CustomNavigationView) findViewById(R.id.navigation_view);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        closeImage = (ImageView) findViewById(R.id.im_close);
-        toolBarTitle = (TextView) findViewById(R.id.title_name);
-        mDrawerLayout.addDrawerListener(this);
-        userEmail = (TextView) findViewById(R.id.user_name);
-        userName = (TextView) findViewById(R.id.user_name);
-        // mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
-        // mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        initViews();
+
         setSupportActionBar(toolbar);
         mCustomNavigationView.getMenu().clear();
         mCustomNavigationView.setMenuItem(this);
         mActionBarDrawerToggle.syncState();
-        animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
         mCustomNavigationView.setNavigationItemSelectedListener(this);
-        closeImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mDrawerLayout.closeDrawer(mCustomNavigationView);
-                closeImage.setVisibility(View.GONE);
-            }
-        });
-        pd = new LoadingView(this);
+        closeImage.setOnClickListener(this);
+        cartButton.setOnClickListener(this);
     }
 
     @Override
@@ -94,12 +86,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int v = item.getItemId();
         switch (v) {
-            case R.id.find_restaurent:
+            case R.id.home:
                 intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
                 break;
@@ -112,15 +103,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             case R.id.registration:
                 intent = new Intent(getApplicationContext(), Signup.class);
                 startActivity(intent);
-                break;
-
-            case R.id.my_order:
-                intent = new Intent(getApplicationContext(), OrderPage.class);
-                startActivity(intent);
-                break;
-
-            case R.id.help:
-                Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.profile:
@@ -178,14 +160,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     //must call before setDisplayHomeAsUpEnabled function
     public void setActionBarTitle(String title) {
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.action_bar_title);
+        /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.id.title_name);*/
         toolBarTitle.setText(title);
     }
 
     @Override
     public void onBackPressed() {
-        if (backPressedCount >= 1) {
+       /* if (backPressedCount >= 1) {
             Log.d("back pressed", String.valueOf(backPressedCount));
 
             moveTaskToBack(true);
@@ -206,38 +188,34 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
             }, 3000);
 
-        }
+        }*/
+        super.onBackPressed();
     }
 
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
-
-
     }
 
     @Override
     public void onDrawerOpened(View drawerView) {
-
     }
 
     @Override
     public void onDrawerClosed(View drawerView) {
-
-
     }
 
     @Override
     public void onDrawerStateChanged(int newState) {
-        if (newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == false) {
+        if (newState == DrawerLayout.STATE_SETTLING && !mDrawerLayout.isDrawerOpen(mCustomNavigationView)) {
             closeImage.setVisibility(View.VISIBLE);
         }
-        if (newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView) == true) {
+        if (newState == DrawerLayout.STATE_SETTLING && mDrawerLayout.isDrawerOpen(mCustomNavigationView)) {
             closeImage.setVisibility(View.GONE);
         }
     }
 
     public String getDeviceId() {
-        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         return android_id;
     }
 
@@ -245,5 +223,74 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         userName.setText(loginResult.getData().getFirstName() + " " + loginResult.getData().getLastName());
         userEmail.setText(loginResult.getData().getEmail());
+    }
+
+    public void startAnimation(Button button) {
+        button.startAnimation(animation);
+    }
+
+    public void addItem(SubCategoryData subCategoryData) {
+        selectedItem.add(subCategoryData);
+        setItemCount();
+    }
+
+    public void removeItem(SubCategoryData subCategoryData) {
+        selectedItem.remove(subCategoryData);
+        setItemCount();
+    }
+
+    private void setItemCount() {
+        if (selectedItem.size() <= 0) {
+            itemCount.setVisibility(View.GONE);
+        } else {
+            itemCount.setVisibility(View.VISIBLE);
+            itemCount.setText(String.valueOf(selectedItem.size()));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.cart:
+                if (selectedItem.size() > 0) {
+                    pd.showDialog();
+                    List<SubCategoryData> itemInCart = new ArrayList<>();
+                    for (SubCategoryData subCategoryData : selectedItem) {
+                        if (subCategoryData.getChecked()) {
+                            itemInCart.add(subCategoryData);
+                        }
+                    }
+                    Intent intent = new Intent(getApplicationContext(), Checkout.class);
+                    intent.putExtra("OrderedItem", (Serializable) itemInCart);
+                    pd.hideDialog();
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Sorry you have nothing in cart", Toast.LENGTH_SHORT).show();
+            }
+                break;
+            case R.id.im_close:
+                mDrawerLayout.closeDrawer(mCustomNavigationView);
+                closeImage.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+
+    private void initViews() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mCustomNavigationView = (CustomNavigationView) findViewById(R.id.navigation_view);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        closeImage = (ImageView) findViewById(R.id.im_close);
+        toolBarTitle = (TextView) findViewById(R.id.title_name);
+        itemCount = (TextView) findViewById(R.id.cart_item);
+        userEmail = (TextView) findViewById(R.id.user_email);
+        userName = (TextView) findViewById(R.id.user_name);
+        selectedItem = new ArrayList<>();
+        cartButton = (ImageView) findViewById(R.id.cart);
+        animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
+        pd = new LoadingView(this);
+        mDrawerLayout.addDrawerListener(this);
     }
 }

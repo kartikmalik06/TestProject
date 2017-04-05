@@ -5,23 +5,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.app.digitalfood.DataObject.Address;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.BaseActivity;
 import com.app.digitalfood.activities.adapter.AddressListAdapter;
+import com.app.digitalfood.activities.controllers.AddressController;
+import com.app.digitalfood.activities.controllers.iAddressController;
 import com.app.digitalfood.activities.view.interfaces.iMyAddress;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAddress extends BaseActivity implements iMyAddress,View.OnClickListener {
+public class MyAddress extends BaseActivity implements iMyAddress, View.OnClickListener {
     private ListView addressList;
     private AddressListAdapter mAddressAdapter;
-    private static List<com.app.digitalfood.DataObject.Address> userAddresses = new ArrayList<com.app.digitalfood.DataObject.Address>();
     private Button addAddress;
     private Intent intent;
-    private String clickedPosition;
+    private iAddressController addressController;
+    int id=10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,39 +35,12 @@ public class MyAddress extends BaseActivity implements iMyAddress,View.OnClickLi
 
         addressList = (ListView) findViewById(R.id.address_list);
         addAddress = (Button) findViewById(R.id.add_address);
-        Bundle b = this.getIntent().getExtras();
-
-        if (b != null) {
-            com.app.digitalfood.DataObject.Address addressHolder = (com.app.digitalfood.DataObject.Address) b.getSerializable("MyAddress");
-            clickedPosition = b.getString("position");
-            if (addressHolder != null) {
-                //need to call webservice for user address
-
-                if (clickedPosition != null) {
-                    userAddresses.remove(Integer.parseInt(clickedPosition));
-                    userAddresses.add(Integer.parseInt(clickedPosition), addressHolder);
-                } else {
-                    userAddresses.add(addressHolder);
-                }
-
-
-            } else {
-
-                if (clickedPosition != null) {
-                    userAddresses.remove(Integer.parseInt(clickedPosition));
-                }
-            }
-        }
-
         //must call before setDisplayHomeAsUpEnabled function
         super.setActionBarTitle("MY ADDRESS");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        if (!(userAddresses == null)) {
-            mAddressAdapter = new AddressListAdapter(this, userAddresses);
-            addressList.setAdapter(mAddressAdapter);
-        }
-
+        addressController = new AddressController(this);
+      //  addressController.getAddressList(id);
+      // pd.showDialog();
         addAddress.setOnClickListener(this);
     }
 
@@ -71,5 +48,36 @@ public class MyAddress extends BaseActivity implements iMyAddress,View.OnClickLi
     public void onClick(View v) {
         intent = new Intent(getApplicationContext(), AddAddress.class);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void showAddressList(List<Address> addresses) {
+
+        if (!(addressList == null)) {
+            mAddressAdapter = new AddressListAdapter(this,this, addresses);
+            addressList.setAdapter(mAddressAdapter);
+            pd.hideDialog();
+        }
+    }
+
+    @Override
+    public void deleteAddress(int id) {
+        pd.showDialog();
+        addressController.deleteAddress(id);
+    }
+
+    @Override
+    public void restartActivity() {
+        pd.hideDialog();
+        Toast.makeText(this, "Address Removed.", Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(getApplicationContext(),MyAddress.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showErrorToast(String s) {
+        pd.hideDialog();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

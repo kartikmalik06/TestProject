@@ -5,6 +5,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +27,8 @@ public class OfferFragment extends Fragment {
 
 
     private List<OfferData> offerDatas=new ArrayList<>();
-    ListView offerList;
+
+    private RecyclerView recyclerView;
 
     public OfferFragment() {
        super();
@@ -40,10 +44,15 @@ public class OfferFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_offer, container, false);
-
-        offerList = (ListView) view.findViewById(R.id.offer_list);
         OfferListAdapter offerListAdapter = new OfferListAdapter(getContext(), offerDatas);
-        offerList.setAdapter(offerListAdapter);
+        /*offerList = (ListView) view.findViewById(R.id.offer_list);
+
+        offerList.setAdapter(offerListAdapter);*/
+        recyclerView = (RecyclerView) view.findViewById(R.id.offer_list);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(offerListAdapter);
         // Inflate the layout for this fragment
         return view;
     }

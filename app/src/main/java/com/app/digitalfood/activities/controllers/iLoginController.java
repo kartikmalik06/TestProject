@@ -1,5 +1,6 @@
 package com.app.digitalfood.activities.controllers;
 
+import com.app.digitalfood.DataObject.LoginData;
 import com.app.digitalfood.DataObject.LoginResult;
 
 /**
@@ -8,7 +9,7 @@ import com.app.digitalfood.DataObject.LoginResult;
 
 public interface iLoginController {
 
-    void login(String userName, String password,String deviceId,String deviceType);
+    void login(String userName, String password, String deviceId, String deviceType);
 
-    void onLoginSuccess(LoginResult loginResult);
+    void onLoginSuccess(LoginData loginData);
 }

@@ -58,8 +58,8 @@ public class CustomGrid extends BaseAdapter{
             grid = inflater.inflate(R.layout.grid_item, null);
             holder.title = (TextView) grid.findViewById(R.id.grid_text);
             holder.img = (ImageView)grid.findViewById(R.id.grid_image);
-            holder.title.setText(web.get(position).getName());
-            holder.img.setImageResource(R.mipmap.ic_launcher);
+            holder.title.setText("Restaurent "+position);
+            holder.img.setImageResource(R.drawable.restaurents);
         } else {
             grid = (View) convertView;
         }

@@ -28,21 +28,21 @@ import java.util.zip.Inflater;
  * Created by beyond on 23-Feb-17.
  */
 
-public class ExpandableListBaseAdapter extends BaseExpandableListAdapter implements AdapterView.OnItemSelectedListener {
+public class ExpandableListBaseAdapter extends BaseExpandableListAdapter {
     private Context context;
     OrderPage orderPage;
-    OrderedItem orderedItem;
     List<CategoryData> menuList = new ArrayList<>();
-    Integer[] listquantity = {1, 2, 3, 4, 5};
-    boolean clicked = false;
-
-
-    ArrayList<ArrayList<Boolean>> selectedChildCheckBoxStates = new ArrayList<>();
 
     public ExpandableListBaseAdapter(Context context, OrderPage orderPage, List<CategoryData> menuList) {
         this.context = context;
         this.orderPage = orderPage;
-        this.menuList = menuList;
+        for (CategoryData categoryData:menuList)
+        {
+            if (categoryData.getSubCategoryData()!=null)
+                this.menuList.add(categoryData);
+        }
+
+
     }
 
     @Override
@@ -110,7 +110,6 @@ public class ExpandableListBaseAdapter extends BaseExpandableListAdapter impleme
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
-
         final SubCategoryData childItem = getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
@@ -118,67 +117,74 @@ public class ExpandableListBaseAdapter extends BaseExpandableListAdapter impleme
             convertView = infalInflater.inflate(R.layout.list_group_item, null);
             holder = new ViewHolder();
             holder.itemName = (TextView) convertView.findViewById(R.id.items);
-            holder.dropDown = (Spinner) convertView.findViewById(R.id.dropdown);
+            holder.plus = (TextView) convertView.findViewById(R.id.plus);
+            holder.minus = (TextView) convertView.findViewById(R.id.minus);
+            holder.quantity = (TextView) convertView.findViewById(R.id.quantity);
             holder.addToCart = (ImageView) convertView.findViewById(R.id.add_cart);
-            orderedItem = new OrderedItem();
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
             // holder.itemName.setTag(childItem.getName());
         }
+
         holder.itemName.setText(childItem.getName());
-        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, listquantity);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        holder.dropDown.setAdapter(dataAdapter);
-
-
+        holder.quantity.setText(String.valueOf(childItem.getQuantity()));
         if (getChild(groupPosition, childPosition).getChecked()) {
             holder.addToCart.setBackgroundColor(Color.YELLOW);
         } else {
             holder.addToCart.setBackgroundColor(Color.WHITE);
         }
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Integer.valueOf(holder.quantity.getText().toString()) > 0) {
+                    childItem.setQuantity(childItem.getQuantity() - 1);
+                    holder.quantity.setText(String.valueOf(childItem.getQuantity()));
+
+                }
+            }
+        });
+
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                childItem.setQuantity(childItem.getQuantity() + 1);
+                holder.quantity.setText(String.valueOf(childItem.getQuantity()));
+
+            }
+        });
+
+
         holder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getChild(groupPosition,childPosition).getChecked())
-                {
-                    orderPage.removeItem(getChildId(groupPosition,childPosition));
+                if (getChild(groupPosition, childPosition).getChecked()) {
+                    orderPage.removeItem(childItem);
                     holder.addToCart.setBackgroundColor(Color.WHITE);
                     getChild(groupPosition, childPosition).setChecked(false);
-                }
-                else
-                {
-                    orderPage.addItem(getChildId(groupPosition,childPosition),orderedItem);
+                } else {
+
+                    orderPage.addItem(childItem);
                     holder.addToCart.setBackgroundColor(Color.YELLOW);
-                    getChild(groupPosition,childPosition).setChecked(true);
+                    getChild(groupPosition, childPosition).setChecked(true);
                 }
 
             }
         });
-        holder.dropDown.setOnItemSelectedListener(this);
         return convertView;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+        return false;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Integer quantity = (Integer) parent.getItemAtPosition(position);
-        orderedItem.setQuantity(quantity);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     class ViewHolder {
 
         public TextView itemName;
-        public Spinner dropDown;
+        public TextView plus, minus, quantity;
         public ImageView addToCart;
     }
 

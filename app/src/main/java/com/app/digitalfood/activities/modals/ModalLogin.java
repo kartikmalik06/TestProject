@@ -34,7 +34,7 @@ public class ModalLogin implements iModalLogin {
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 1) {
-                        iLoginController.onLoginSuccess(response.body());
+                        iLoginController.onLoginSuccess(response.body().getData());
                     }
                 }
 

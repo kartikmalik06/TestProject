@@ -33,16 +33,17 @@ public class MenuFragment extends Fragment {
     ArrayList<CategoryGroup> listHeader;
     HashMap<CategoryGroup, List<Categoryitem>> listChild;
     private OrderPage orderPage;
-    List<CategoryData> menuList=new ArrayList<>();
+    List<CategoryData> menuList = new ArrayList<>();
+
     public MenuFragment() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-    public MenuFragment(OrderPage orderPage,List<CategoryData> menuList) {
+    public MenuFragment(OrderPage orderPage, List<CategoryData> menuList) {
         super();
         this.orderPage = orderPage;
-      this.menuList=menuList;
+        this.menuList = menuList;
 
     }
 
@@ -51,11 +52,11 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment, container, false);
 
-            expandableListView = (ExpandableListView) view.findViewById(R.id.food_type);
-            Log.d("string", "yes");
-            expandableListView.setGroupIndicator(null);
-            expandableListBaseAdapter = new ExpandableListBaseAdapter(getContext(), orderPage, menuList);
-            expandableListView.setAdapter(expandableListBaseAdapter);
+        expandableListView = (ExpandableListView) view.findViewById(R.id.food_type);
+        Log.d("string", "yes");
+        expandableListView.setGroupIndicator(null);
+        expandableListBaseAdapter = new ExpandableListBaseAdapter(getContext(), orderPage, menuList);
+        expandableListView.setAdapter(expandableListBaseAdapter);
 
         return view;
     }

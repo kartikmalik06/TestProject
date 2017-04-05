@@ -1,8 +1,12 @@
 package com.app.digitalfood.activities.controllers;
 
+import android.content.Context;
+
+import com.app.digitalfood.DataObject.LoginData;
 import com.app.digitalfood.DataObject.LoginResult;
 import com.app.digitalfood.activities.modals.ModalLogin;
 import com.app.digitalfood.activities.view.interfaces.iLogin;
+import com.app.digitalfood.database.DatabaseHandler;
 
 /**
  * Created by kartik on 28-Mar-17.
@@ -25,8 +29,10 @@ public class LoginController implements iLoginController {
     }
 
     @Override
-    public void onLoginSuccess(LoginResult loginResult) {
+    public void onLoginSuccess(LoginData loginData) {
         iLogin.setLoginStatus(true);
-       // iLogin.setUserData(loginResult);
+        DatabaseHandler databaseHandler = new DatabaseHandler((Context) iLogin);
+        databaseHandler.addUserInfo(loginData.getId(), loginData.getFirstName(), loginData.getEmail(), loginData.getMobile(), true);
+        // iLogin.setUserData(loginResult);
     }
 }

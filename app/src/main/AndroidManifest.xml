@@ -35,6 +35,7 @@
         <activity android:name=".activities.view.ProfilePage" />
         <activity android:name=".activities.view.ChangePassword" />
         <activity android:name=".activities.view.ReviewPage" />
+        <activity android:name=".activities.view.Checkout" />
         <activity android:name=".activities.view.FavouritePage" />
         <activity
             android:name=".activities.view.AddAddress"

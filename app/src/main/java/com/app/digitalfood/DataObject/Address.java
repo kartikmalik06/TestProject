@@ -9,53 +9,118 @@ import java.io.Serializable;
  */
 
 public class Address implements Serializable {
+    @SerializedName("id")
+    private int id;
     @SerializedName("name")
-    private String userName;
-    @SerializedName("address")
-    private String userAddress;
-    //private String userCity;
-    @SerializedName("phone")
-    private String userPhone;
+    private String name="";
+    @SerializedName("user_id")
+    private int userId;
+    @SerializedName("address1")
+    private String address1;
+    @SerializedName("address2")
+    private String address2;
+    @SerializedName("city")
+    private String city;
+    @SerializedName("state")
+    private String state;
+    @SerializedName("mobile")
+    private int mobile;
     @SerializedName("postcode")
-    private String userPostalCode;
+    private String postcode="";
+    @SerializedName("delivery_instruction")
+    private String delivery_instruction="";
+    @SerializedName("country")
+    private String country="";
 
-    public String getUserName() {
-        return userName;
+
+
+    public int getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+
+
+    public String getName() {
+        return name;
     }
 
-    public String getUserAddress() {
-        return userAddress;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public String getAddress1() {
+        return address1;
     }
 
-   /* public String getUserCity() {
-        return userCity;
+    public String getAddress2() {
+        return address2;
     }
 
-    public void setUserCity(String userCity) {
-        this.userCity = userCity;
-    }
-*/
-    public String getUserPhone() {
-        return userPhone;
+    public String getCity() {
+        return city;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public String getState() {
+        return state;
     }
 
-    public String getUserPostalCode() {
-        return userPostalCode;
+    public int getMobile() {
+        return mobile;
     }
 
-    public void setUserPostalCode(String userPostalCode) {
-        this.userPostalCode = userPostalCode;
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public String getDelivery_instruction() {
+        return delivery_instruction;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setMobile(int mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public void setDelivery_instruction(String delivery_instruction) {
+        this.delivery_instruction = delivery_instruction;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

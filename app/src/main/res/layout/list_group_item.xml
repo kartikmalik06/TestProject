@@ -3,27 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/_5sdp"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/items"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:padding="@dimen/_5sdp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="0.5"
         android:gravity="center|left"
+        android:padding="@dimen/_5sdp"
         android:text="Pizzaa"
-        android:textSize="@dimen/_18sdp" />
-
-    <Spinner
-        android:id="@+id/dropdown"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="fill_parent"
-        tools:listitem="1" />
+        android:textSize="@dimen/_15sdp" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/minus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:gravity="center"
+            android:rotation="90"
+            android:text="|"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:maxLength="2"
+            android:text="1"
+            android:textSize="@dimen/_22sdp" />
+
+        <TextView
+            android:id="@+id/plus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_20sdp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
+        android:layout_weight="0.3"
         android:gravity="right">
 
         <ImageView

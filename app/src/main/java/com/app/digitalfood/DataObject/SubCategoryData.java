@@ -4,11 +4,13 @@ import android.media.Image;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by beyond on 29-Mar-17.
  */
 
-public class SubCategoryData {
+public class SubCategoryData implements Serializable {
     @SerializedName("parent_id")
     int parent_id;
     @SerializedName("company_id")
@@ -32,7 +34,17 @@ public class SubCategoryData {
     @SerializedName("itemCount")
     int itemCount;
 
-    boolean isChecked=false;
+    boolean isChecked = false;
+
+    int quantity = 1;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public boolean getChecked() {
         return isChecked;

@@ -3,6 +3,7 @@ package com.app.digitalfood.component;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 /**
@@ -11,8 +12,11 @@ import android.widget.EditText;
 
 public class CustomEditText extends EditText {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    Context context;
     public CustomEditText(Context context, AttributeSet attrs) {
+
         super(context, attrs);
+        this.context=context;
     }
 
     public boolean isFieldEmpty()
@@ -35,5 +39,11 @@ public class CustomEditText extends EditText {
             setError("Not vaild Email address");
             return false;
         }
+    }
+
+    public void showKeyBoard()
+    {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
     }
 }

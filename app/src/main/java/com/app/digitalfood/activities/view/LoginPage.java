@@ -21,6 +21,8 @@ import com.app.digitalfood.activities.view.interfaces.iLogin;
 import com.app.digitalfood.component.CustomEditText;
 import com.app.digitalfood.component.FbLogin;
 import com.app.digitalfood.component.GoogleSignIn;
+import com.facebook.CallbackManager;
+import com.facebook.internal.CallbackManagerImpl;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -41,9 +43,9 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
     private TextView rememberMe;
     String name, email, gender, birthday;
     private Intent intent;
-    private Animation animation;
     private iLoginController iLoginController;
     private boolean loginStatus = false;
+    public CallbackManager callbackManager;
 
     String profile_pic;
     private ImageLoader imageLoader;
@@ -57,7 +59,9 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fb = new FbLogin(this);
+
         setContentView(R.layout.activity_login);
+        callbackManager = CallbackManager.Factory.create();
         //filed decalaration
         initViews();
 
@@ -76,10 +80,10 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_btn:
-                signIn.startAnimation(animation);
+                super.startAnimation(signIn);
                 if ((emailId.isFieldEmpty() && password.isFieldEmpty()) && emailId.isVaildEmail()) {
 
-                    iLoginController.login(emailId.getText().toString(), password.getText().toString(),super.getDeviceId(),"Android");
+                    iLoginController.login(emailId.getText().toString(), password.getText().toString(), super.getDeviceId(), "Android");
                     if (isLogin()) {
                         // set login status to true
                         intent = new Intent(getApplicationContext(), HomePage.class);
@@ -96,7 +100,7 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
                 startActivity(intent);
                 break;
             case R.id.login_fb:
-                fb.login();
+                fb.login(callbackManager);
                 break;
             case R.id.login_tw:
                 Log.d("tw", "true");
@@ -108,8 +112,6 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
     }
 
 
-
-
     @Override
     public void setLoginStatus(boolean status) {
         loginStatus = status;
@@ -119,15 +121,19 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
         //If signin
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             //Calling a new function to handle signin
             handleSignInResult(result);
             Toast.makeText(this, result.getSignInAccount().getDisplayName(), Toast.LENGTH_SHORT).show();
-        } else {
-            fb.callbackManager.onActivityResult(requestCode, resultCode, data);
+        } else if (requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
+            Log.d("fb","onactivity result");
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+            super.updateLoginStatus(true);
+            Intent intent=new Intent(this, HomePage.class);
+            startActivity(intent);
         }
     }
 
@@ -138,7 +144,6 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
         if (result.isSuccess()) {
             //Getting google account
             GoogleSignInAccount acct = result.getSignInAccount();
-
           /*  //Displaying name and email
             textViewName.setText(acct.getDisplayName());
             textViewEmail.setText(acct.getEmail());
@@ -169,7 +174,6 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
         createAccount = (TextView) findViewById(R.id.new_user);
         fbLogin = (TextView) findViewById(R.id.login_fb);
         twLogin = (TextView) findViewById(R.id.login_tw);
-        animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
     }
 
     public void setFbUserData(JSONObject userData) {
@@ -188,7 +192,7 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
 
     @Override
     public void setUserData(LoginResult loginResult) {
-        setUserDetail(loginResult);
+
     }
 
 

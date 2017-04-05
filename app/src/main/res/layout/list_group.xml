@@ -9,27 +9,29 @@
     <TextView
         android:id="@+id/group_lable"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:gravity="center|left"
-        android:paddingLeft="@dimen/_15sdp"
+        android:padding="@dimen/_15sdp"
         android:text="food"
+        android:layout_gravity="center"
         android:textColor="@color/Black"
-        android:textSize="@dimen/_12sdp" />
+        android:textSize="@dimen/_17sdp" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:gravity="right|center"
         android:paddingBottom="@dimen/_3sdp"
+        android:gravity="right"
         android:paddingRight="@dimen/_20sdp"
         android:paddingTop="@dimen/_3sdp">
 
         <ImageView
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="fill_parent"
             android:src="@drawable/icon_food" />
     </LinearLayout>
 </LinearLayout>

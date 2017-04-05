@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import java.util.zip.Inflater;
  * Created by beyond on 30-Mar-17.
  */
 
-public class OfferListAdapter extends BaseAdapter implements View.OnClickListener {
+public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyViewHolder> implements View.OnClickListener {
 
     private List<OfferData> offerdatas;
     private Context context;
@@ -35,32 +36,22 @@ public class OfferListAdapter extends BaseAdapter implements View.OnClickListene
     }
 
     @Override
-    public int getCount() {
-        return offerdatas.size();
+    public void onClick(View v) {
+
     }
 
     @Override
-    public Object getItem(int position) {
-        return offerdatas.get(position);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.offer, parent, false);
+
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
+    public void onBindViewHolder(final MyViewHolder viewHolder, final int position) {
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-
-       final ViewHolder viewHolder=new ViewHolder();
-        if (convertView == null) {
-
-            LayoutInflater infalInflater = (LayoutInflater) this.context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.offer, null);
-        }
-        viewHolder.offerImage = (ImageView) convertView.findViewById(R.id.offer_image);
-         new Thread(new Runnable() {
+        new Thread(new Runnable() {
             URL newurl = null;
             @Override
             public void run() {
@@ -74,6 +65,7 @@ public class OfferListAdapter extends BaseAdapter implements View.OnClickListene
                             if(bitmap !=null)
                             {
                                 viewHolder.offerImage.setImageBitmap(bitmap);
+
                             }
                         }
                     });
@@ -83,20 +75,22 @@ public class OfferListAdapter extends BaseAdapter implements View.OnClickListene
                 }
             }
         }).start();
-
-
-        return convertView;
     }
-
 
     @Override
-    public void onClick(View v) {
-
+    public int getItemCount() {
+        return offerdatas.size();
     }
 
 
-    class ViewHolder
-    {
-        ImageView offerImage;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public ImageView offerImage;
+        public MyViewHolder(View view) {
+            super(view);
+
+            offerImage = (ImageView) view.findViewById(R.id.offer_image);
+        }
+
+
     }
 }

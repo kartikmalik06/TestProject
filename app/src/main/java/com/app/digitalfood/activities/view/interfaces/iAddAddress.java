@@ -5,4 +5,5 @@ package com.app.digitalfood.activities.view.interfaces;
  */
 
 public interface iAddAddress {
+    void onAddressadded();
 }
