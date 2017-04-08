@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="Billing and Shipping Details"
+            android:textSize="@dimen/_16sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/light_blue"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="top"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:text="Full Name"
+                    android:textSize="@dimen/_10sdp" />
+
+                <com.app.digitalfood.component.CustomEditText
+                    android:id="@+id/name_text"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.8"
+                    android:background="@null"
+                    android:padding="@dimen/_3sdp"
+                    android:text=""
+                    android:textSize="@dimen/_20sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:weightSum="1"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:background="@color/light_blue">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:text="Address"
+                    android:textSize="@dimen/_8sdp" />
+
+                <com.app.digitalfood.component.CustomEditText
+                    android:id="@+id/address_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:padding="@dimen/_3sdp"
+                    android:textSize="@dimen/_20sdp"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/light_blue">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:text="City"
+                    android:textSize="@dimen/_8sdp" />
+
+                <com.app.digitalfood.component.CustomEditText
+                    android:id="@+id/city_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:padding="@dimen/_3sdp"
+                    android:textSize="@dimen/_20sdp"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/light_blue">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="Pincode"
+                        android:textSize="@dimen/_8sdp" />
+
+                    <com.app.digitalfood.component.CustomEditText
+                        android:id="@+id/pincode_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.6"
+                        android:padding="@dimen/_3sdp"
+                        android:textSize="@dimen/_20sdp"
+                        android:layout_height="fill_parent"
+                        android:background="@null"
+                        android:text="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/light_blue">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="Phone"
+                        android:textSize="@dimen/_8sdp" />
+
+                    <com.app.digitalfood.component.CustomEditText
+                        android:id="@+id/phone_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.6"
+                        android:padding="@dimen/_3sdp"
+                        android:textSize="@dimen/_20sdp"
+                        android:layout_height="fill_parent"
+                        android:background="@null"
+                        android:text="" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/light_blue">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:text="Country"
+                    android:textSize="@dimen/_8sdp" />
+
+                <com.app.digitalfood.component.CustomEditText
+                    android:id="@+id/country_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:padding="@dimen/_3sdp"
+                    android:textSize="@dimen/_20sdp"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:text="" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:background="@drawable/btn_login"
+            android:text="Proceed"
+            android:textColor="@color/White" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
