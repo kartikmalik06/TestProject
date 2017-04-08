@@ -1,5 +1,7 @@
 package com.app.digitalfood.activities.modals;
 
+import android.util.Log;
+
 import com.app.digitalfood.DataObject.AddressResponse;
 import com.app.digitalfood.DataObject.DefautResponce;
 import com.app.digitalfood.activities.controllers.iAddAddressController;
@@ -35,13 +37,14 @@ public class ModalAddress implements IModalAddress {
 
 
     @Override
-    public void getuserAddressList(int id) {
-        Call<AddressResponse> call = service.getAddressList(id);
+    public void getuserAddressList(int user_id) {
+
+        Call<AddressResponse> call = service.getAddressList(user_id);
         call.enqueue(new Callback<AddressResponse>() {
             @Override
             public void onResponse(Call<AddressResponse> call, Response<AddressResponse> response) {
                 if (response.isSuccessful())
-                    if (response.body().getMessage() == "") {
+                    if (response.body().getMessage().trim().isEmpty()) {
                         addressController.setAddressList(response.body().getData());
                     } else {
                         addressController.showErrorMessage("No address to show");
@@ -50,7 +53,7 @@ public class ModalAddress implements IModalAddress {
 
             @Override
             public void onFailure(Call<AddressResponse> call, Throwable t) {
-
+                addressController.showErrorMessage(t.getMessage());
             }
         });
 
@@ -75,21 +78,25 @@ public class ModalAddress implements IModalAddress {
 
     @Override
     public void addAddressInDB(int userID, String userName, String userAddress, String userPhone) {
+        Log.d("addAddressInDB", "called");
         Call<DefautResponce> call = service.addAddressInDB(userID, userName, userAddress, userPhone);
         call.enqueue(new Callback<DefautResponce>() {
             @Override
             public void onResponse(Call<DefautResponce> call, Response<DefautResponce> response) {
-
-                if (response.body().getMessage() == "")
-                    addAddressController.addressAdded();
+                Log.d("onResponse", "called");
+                if (response.body().getMessage() != "") {
+                    Log.d("onResponse.body", "called");
+                    addAddressController.addressAdded(response.body().getMessage());
+                }
             }
 
             @Override
             public void onFailure(Call<DefautResponce> call, Throwable t) {
-
+                Log.d("onFailure", "called");
             }
         });
     }
+
 
     @Override
     public void updateAddressInDB(int id, int userID, String userName, String userAddress, String userPhone) {
@@ -97,7 +104,7 @@ public class ModalAddress implements IModalAddress {
         call.enqueue(new Callback<DefautResponce>() {
             @Override
             public void onResponse(Call<DefautResponce> call, Response<DefautResponce> response) {
-                addAddressController.addressAdded();
+                addAddressController.addressAdded(response.body().getMessage());
             }
 
             @Override

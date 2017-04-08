@@ -7,7 +7,7 @@ package com.app.digitalfood.activities.modals;
 public interface IModalAddress {
 
 
-    void getuserAddressList(int id);
+    void getuserAddressList(int user_id);
 
     void deleteUserAddress(int id);
 

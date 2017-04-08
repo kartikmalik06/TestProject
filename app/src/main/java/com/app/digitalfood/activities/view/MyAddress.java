@@ -25,39 +25,41 @@ public class MyAddress extends BaseActivity implements iMyAddress, View.OnClickL
     private Button addAddress;
     private Intent intent;
     private iAddressController addressController;
-    int id=10;
+    int user_id = 43;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_address);
         super.onCreateDrawer();
-
         addressList = (ListView) findViewById(R.id.address_list);
         addAddress = (Button) findViewById(R.id.add_address);
         //must call before setDisplayHomeAsUpEnabled function
         super.setActionBarTitle("MY ADDRESS");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         addressController = new AddressController(this);
-      //  addressController.getAddressList(id);
-      // pd.showDialog();
+        addressController.getAddressList(user_id);
+        pd.showDialog();
         addAddress.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        intent = new Intent(getApplicationContext(), AddAddress.class);
-        startActivity(intent);
+        super.onClick(v);
+        if (v.getId() == R.id.add_address) {
+            intent = new Intent(getApplicationContext(), AddAddress.class);
+            startActivity(intent);
+        }
     }
 
 
     @Override
     public void showAddressList(List<Address> addresses) {
-
-        if (!(addressList == null)) {
-            mAddressAdapter = new AddressListAdapter(this,this, addresses);
+        pd.hideDialog();
+        if (!(addresses == null)) {
+            mAddressAdapter = new AddressListAdapter(this, this, addresses);
             addressList.setAdapter(mAddressAdapter);
-            pd.hideDialog();
+
         }
     }
 
@@ -71,7 +73,7 @@ public class MyAddress extends BaseActivity implements iMyAddress, View.OnClickL
     public void restartActivity() {
         pd.hideDialog();
         Toast.makeText(this, "Address Removed.", Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(getApplicationContext(),MyAddress.class);
+        Intent intent = new Intent(getApplicationContext(), MyAddress.class);
         startActivity(intent);
     }
 

@@ -2,8 +2,10 @@ package com.app.digitalfood.activities.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.app.digitalfood.DataObject.Address;
 import com.app.digitalfood.R;
@@ -54,15 +56,26 @@ public class AddAddress extends BaseActivity implements iAddAddress, View.OnClic
 
     @Override
     public void onClick(View v) {
-        if (!isEditable) {
-            if (userName.isFieldEmpty() && userAddress.isFieldEmpty() && userCity.isFieldEmpty() && userPhone.isFieldEmpty() && userPostalCode.isFieldEmpty()) {
-                addAddressController.addAddress(userID, userName.getText().toString(), userAddress.getText().toString(), userPhone.getText().toString());
-            }
-        } else {
-            isEditable = false;
-            if (userName.isFieldEmpty() && userAddress.isFieldEmpty() && userCity.isFieldEmpty() && userPhone.isFieldEmpty() && userPostalCode.isFieldEmpty()) {
-                addAddressController.updateAddress(id, userID, userName.getText().toString(), userAddress.getText().toString(), userPhone.getText().toString());
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.btn_proceed: {
 
+                if (!isEditable) {
+                    Log.d("add address","clicked");
+                    if (userName.isFieldEmpty() && userAddress.isFieldEmpty() && userCity.isFieldEmpty() && userPhone.isFieldEmpty() && userPostalCode.isFieldEmpty()) {
+                        pd.showDialog();
+                        addAddressController.addAddress(userID, userName.getText().toString(), userAddress.getText().toString(), userPhone.getText().toString());
+                    }
+                } else {
+                    Log.d("update address","clicked");
+                    isEditable = false;
+                    if (userName.isFieldEmpty() && userAddress.isFieldEmpty() && userCity.isFieldEmpty() && userPhone.isFieldEmpty() && userPostalCode.isFieldEmpty()) {
+                        pd.showDialog();
+                        addAddressController.updateAddress(id, userID, userName.getText().toString(), userAddress.getText().toString(), userPhone.getText().toString());
+
+                    }
+                }
+                break;
             }
         }
     }
@@ -77,7 +90,9 @@ public class AddAddress extends BaseActivity implements iAddAddress, View.OnClic
         submitButton = (Button) findViewById(R.id.btn_proceed);
     }
 
-    public void onAddressadded() {
+    public void onAddressadded(String message) {
+        pd.hideDialog();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         intent = new Intent(getApplicationContext(), MyAddress.class);
         startActivity(intent);
     }

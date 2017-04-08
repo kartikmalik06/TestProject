@@ -24,11 +24,11 @@ public class Address implements Serializable {
     @SerializedName("state")
     private String state;
     @SerializedName("mobile")
-    private int mobile;
+    private String mobile;
     @SerializedName("postcode")
-    private String postcode="";
+    private String postcode;
     @SerializedName("delivery_instruction")
-    private String delivery_instruction="";
+    private String delivery_instruction;
     @SerializedName("country")
     private String country="";
 
@@ -64,7 +64,7 @@ public class Address implements Serializable {
         return state;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
@@ -108,7 +108,7 @@ public class Address implements Serializable {
         this.state = state;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

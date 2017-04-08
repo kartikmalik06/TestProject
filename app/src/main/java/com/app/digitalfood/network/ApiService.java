@@ -46,18 +46,22 @@ public interface ApiService {
     Call<OfferResult> getOfferList(@Field("branch_id") String branchId);
 
     @FormUrlEncoded
-    @POST("deliveryaddress/view")
-    Call<AddressResponse> getAddressList(@Field("id") int id);
+    @POST("deliveryaddress/list")
+    Call<AddressResponse> getAddressList(@Field("user_id") int user_id);
 
     @FormUrlEncoded
     @POST("deliveryaddress/delete")
     Call<DefautResponce> deleteAddressInDB(@Field("id") int id);
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("deliveryaddress/create")
     Call<DefautResponce> addAddressInDB(@Field("user_id") int userID, @Field("name") String userName, @Field("address1") String userAddress, @Field("mobile") String userPhone);
-
+*/
     @FormUrlEncoded
     @POST("deliveryaddress/update")
     Call<DefautResponce> updateAddress(@Field("id") int id, @Field("user_id") int userID, @Field("name") String userName, @Field("address1") String userAddress, @Field("mobile") String userPhone);
+
+    @FormUrlEncoded
+    @POST("deliveryaddress/create")
+    Call<DefautResponce> addAddressInDB(@Field("user_id") int userID, @Field("name") String userName, @Field("address1") String userAddress, @Field("mobile") String userPhone);
 }

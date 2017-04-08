@@ -23,8 +23,8 @@ public class AddressController implements iAddressController {
     }
 
     @Override
-    public void getAddressList(int id) {
-        modalAddress.getuserAddressList(id);
+    public void getAddressList(int user_id) {
+        modalAddress.getuserAddressList(user_id);
     }
 
     @Override

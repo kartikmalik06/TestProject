@@ -2,7 +2,6 @@ package com.app.digitalfood.activities.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,16 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import com.app.digitalfood.DataObject.Address;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.view.AddAddress;
-import com.app.digitalfood.activities.view.MyAddress;
 import com.app.digitalfood.activities.view.interfaces.iMyAddress;
-
-
 import java.util.List;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by beyond on 24-Feb-17.
@@ -31,7 +28,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
     private TextView userName, userAddress, userCity, userPhone;
     private ImageView options;
     iMyAddress myAddress;
-
+    private PopupWindow mPopupWindow;
 
     public AddressListAdapter(Context context, iMyAddress myAddress, List<Address> addresses) {
         this.context = context;
@@ -58,27 +55,31 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.address_list_item, null);
         }
         initViews(convertView);
         Address address = getItem(position);
 
-        userName.setText(address.getName());
-        userAddress.setText(address.getAddress1() + ", " + address.getAddress2());
-        userCity.setText(address.getCity() + ", " + address.getState() + ", " + address.getCountry() + ", " + address.getPostcode());
-        userPhone.setText(String.valueOf(address.getMobile()));
+        userName.setText(getValues(address.getName()));
+        userAddress.setText(getValues(address.getAddress1()) + getValues(address.getAddress2()));
+        userCity.setText(getValues(address.getCity()) + getValues(address.getState()) + getValues(address.getCountry()) +getValues(address.getPostcode()));
+        userPhone.setText(getValues(String.valueOf(address.getMobile())));
 
         options.setTag(position);
         options.setOnClickListener(this);
         return convertView;
     }
 
+    private String getValues(String name) {
+
+        return name.trim().isEmpty()?name+" ":"";
+    }
+
 
     @Override
     public void onClick(View v) {
-
-        PopupMenu popupMenu = new PopupMenu(context, options);
+        PopupMenu popupMenu = new PopupMenu(context, v);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -99,6 +100,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnClickListe
             }
         });
         popupMenu.show();
+
 
     }
 
