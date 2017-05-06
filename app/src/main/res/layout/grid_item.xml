@@ -1,26 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/branch_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="5dp" >
+    android:clickable="true"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/grid_image"
+
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="0dp"
+        android:background="#000"
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kanha" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-       >
-    </ImageView>
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        android:alpha="0.8"
+        android:background="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/branch_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/grid_text"
-        android:text="location 1"
-        android:layout_width="wrap_content"
+        android:id="@+id/restaurent_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:textSize="9sp" >
-    </TextView>
+        android:text="Kanha malviya Nagar"
+        android:textColor="#fff"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/imageView"
+        android:layout_marginRight="8dp" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.31"
+        app:layout_constraintLeft_toRightOf="@+id/distance"
+        app:layout_constraintRight_toRightOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/compass" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="3dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintLeft_toLeftOf="@+id/restaurent_name"
+        app:layout_constraintTop_toBottomOf="@+id/restaurent_name"
+        app:layout_constraintVertical_bias="0.388"
+        app:srcCompat="@drawable/information" />
+
+    <TextView
+        android:id="@+id/food_type"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="7dp"
+        android:text="Indian | Chienes"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintLeft_toRightOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/restaurent_name" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintLeft_toRightOf="@+id/food_type"
+        app:layout_constraintTop_toBottomOf="@+id/restaurent_name"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/location" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center|left"
+        android:textColor="#fff"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintLeft_toRightOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/restaurent_name"
+        android:text="15 KM"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/restaurent_name"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

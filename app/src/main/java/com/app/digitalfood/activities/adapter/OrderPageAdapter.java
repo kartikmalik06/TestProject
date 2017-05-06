@@ -21,19 +21,22 @@ import java.util.List;
 public class OrderPageAdapter extends FragmentStatePagerAdapter {
     private OrderPage orderPage;
     List<CategoryData> menuList=new ArrayList<CategoryData>();
-    List<OfferData> OfferDatas=new ArrayList<OfferData>();
-    public OrderPageAdapter(FragmentManager fm, OrderPage orderPage, List<CategoryData> menuList, List<OfferData> OfferDatas) {
+    //List<OfferData> OfferDatas=new ArrayList<OfferData>();
+    String brancch_id;
+    public OrderPageAdapter(FragmentManager fm, OrderPage orderPage, List<CategoryData> menuList, String brancch_id) {
         super(fm);
         this.orderPage=orderPage;
         this.menuList=menuList;
-        this.OfferDatas=OfferDatas;
+        this.brancch_id=brancch_id;
+
+       // this.OfferDatas=OfferDatas;
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public MenuFragment getItem(int position) {
 
-        Fragment frag = null;
-        switch (position) {
+       // Fragment frag = null;
+        /*switch (position) {
 
             case 0:
                 frag = new MenuFragment(orderPage,menuList);
@@ -44,19 +47,19 @@ public class OrderPageAdapter extends FragmentStatePagerAdapter {
             case 2:
                 frag = new InfoFragment();
                 break;
-        }
-        return frag;
+        }*/
+        return new MenuFragment(orderPage,menuList.get(position).getItemData());
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return menuList.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        String title = " ";
-        switch (position) {
+        String title = menuList.get(position).getName();
+        /*switch (position) {
             case 0:
                 title = "Menu";
                 break;
@@ -67,7 +70,7 @@ public class OrderPageAdapter extends FragmentStatePagerAdapter {
                 title = "Info";
                 break;
 
-        }
+        }*/
 
         return title;
     }

@@ -13,7 +13,9 @@ public interface iHomePage {
 
     void checkDeviceid(String deviceId);
 
-    void setBranchList(List<BranchType> listBranch);
+    void onReceiveBranches(List<BranchType> listBranch);
 
     void setDiscription(boolean expand);
+
+    void showToast(String message);
 }

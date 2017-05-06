@@ -33,8 +33,8 @@ public class CategoryData {
     String imageUrl;
     @SerializedName("itemCount")
     int itemCount;
-    @SerializedName("subCategory")
-    List<SubCategoryData> subCategory =new ArrayList<SubCategoryData>();
+    @SerializedName("itemList")
+    List<ItemData> itemList =new ArrayList<ItemData>();
 
     public int getParent_id() {
         return parent_id;
@@ -80,7 +80,7 @@ public class CategoryData {
         return itemCount;
     }
 
-    public List<SubCategoryData> getSubCategoryData() {
-        return subCategory;
+    public List<ItemData> getItemData() {
+        return itemList;
     }
 }

@@ -40,7 +40,6 @@ public class ProfilePage extends BaseActivity implements iProfilePage, View.OnCl
 
         //must call before setDisplayHomeAsUpEnabled function
         super.setActionBarTitle("MY PROFILE");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //need to add controller to fecth data
         //ProfileController.getUserProfile();
@@ -50,6 +49,7 @@ public class ProfilePage extends BaseActivity implements iProfilePage, View.OnCl
 
     @Override
     public void onClick(View v) {
+        super.onClick(v);
         switch (v.getId()) {
             case R.id.edit_profile:
                 setTextInAllEditTexts();

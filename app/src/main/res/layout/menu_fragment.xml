@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recycler_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Menu"
-        android:layout_marginTop="@dimen/_9sdp"
-        android:textSize="@dimen/_20sdp"/>
-
-    <ExpandableListView
-        android:id="@+id/food_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indicatorLeft="@dimen/_250sdp"
-        android:indicatorRight="@dimen/_320sdp"
-        android:listSelector="@drawable/selector_list_item"
-        android:transcriptMode="normal">
-
-    </ExpandableListView>
-
-</LinearLayout>
+    android:layout_height="match_parent" />

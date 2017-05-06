@@ -1,5 +1,7 @@
 package com.app.digitalfood.activities.controllers;
 
+import android.util.Log;
+
 import com.app.digitalfood.DataObject.BranchType;
 import com.app.digitalfood.activities.modals.ModalHomePage;
 import com.app.digitalfood.activities.modals.iModalHomePage;
@@ -36,14 +38,20 @@ public class HomePageController implements IHomepageController {
     }
 
     @Override
-    public void getGridViewData() {
-        modalHomePage.getRestaurentList();
+    public void getBranches() {
+        modalHomePage.getBranchesFromDB();
 
     }
 
     @Override
-    public void setGridViewData(List<BranchType> branchlist) {
-        homePage.setBranchList(branchlist);
+    public void onResult(List<BranchType> branchlist) {
+        Log.d("Fetching:"," InController");
+        homePage.onReceiveBranches(branchlist);
 
+    }
+
+    @Override
+    public void showError(String message) {
+        homePage.showToast(message);
     }
 }

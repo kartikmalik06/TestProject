@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
     public static Retrofit getService() {
         Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("http://demo.3edgetechnologies.com/takeaway/back-end/api/").
+                baseUrl("http://demo.3edgetechnologies.com/").
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
         return retrofit;

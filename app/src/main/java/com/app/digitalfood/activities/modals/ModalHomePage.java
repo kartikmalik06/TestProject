@@ -1,5 +1,6 @@
 package com.app.digitalfood.activities.modals;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.app.digitalfood.DataObject.Branch;
@@ -27,23 +28,31 @@ public class ModalHomePage implements iModalHomePage {
     }
 
     @Override
-    public void getRestaurentList() {
-        Call<Branch> call = service.getBranches();
+    public void getBranchesFromDB() {
+        Call<Branch> call = service.branchList();
+        Log.d("Fetching:"," called");
         call.enqueue(new Callback<Branch>() {
             @Override
             public void onResponse(Call<Branch> call, Response<Branch> response) {
-                if (response.isSuccessful())
-                    if (response.body().getStatus()==1) {
-                        Log.d("branch result","pass");
-                        homepageController.setGridViewData(response.body().getData());
-                    }
-                else
-                        Log.d("branch result",response.body().getMessage());
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 1) {
+                        if (TextUtils.isEmpty(response.body().getMessage())) {
+                            Log.d("branch result", "pass");
+                            homepageController.onResult(response.body().getData());
+                        }
+                        else {
+                            homepageController.showError(response.body().getMessage());
+                        }
+
+                    } else
+                        Log.d("branch result", response.body().getMessage());
+                }
             }
 
             @Override
             public void onFailure(Call<Branch> call, Throwable t) {
                 Log.d("branch result","failure");
+                homepageController.showError(t.getMessage());
             }
         });
 

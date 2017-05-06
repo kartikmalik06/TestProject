@@ -1,8 +1,6 @@
 package com.app.digitalfood.activities.view.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,14 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.app.digitalfood.DataObject.Address;
-import com.app.digitalfood.DataObject.SubCategoryData;
+import com.app.digitalfood.DataObject.ItemData;
 import com.app.digitalfood.R;
-import com.app.digitalfood.activities.adapter.SelectedItemListAdapter;
 import com.app.digitalfood.activities.view.Checkout;
 import com.app.digitalfood.component.CustomEditText;
 
@@ -30,7 +25,7 @@ import java.util.List;
 
 public class PaymentDetails extends Fragment implements TextView.OnEditorActionListener {
 
-    List<SubCategoryData> orderedItem;
+    List<ItemData> orderedItem;
     TextView name, address, city_pincode, subTotal, discount, total;
     CustomEditText voucherCode;
     Button makePayment;
@@ -44,7 +39,7 @@ public class PaymentDetails extends Fragment implements TextView.OnEditorActionL
     }
 
     @SuppressLint("ValidFragment")
-    public PaymentDetails(List<SubCategoryData> orderedItem) {
+    public PaymentDetails(List<ItemData> orderedItem) {
         this.orderedItem = orderedItem;
     }
 
@@ -63,11 +58,11 @@ public class PaymentDetails extends Fragment implements TextView.OnEditorActionL
             displayAddress();
         }
         voucherCode.setOnEditorActionListener(this);
-        SelectedItemListAdapter selectedItemListAdapter = new SelectedItemListAdapter(orderedItem);
+        //SelectedItemListAdapter selectedItemListAdapter = new SelectedItemListAdapter(getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(selectedItemListAdapter);
+       // recyclerView.setAdapter(selectedItemListAdapter);
         makeInvoice();
         netPay();
         return view;
@@ -75,8 +70,8 @@ public class PaymentDetails extends Fragment implements TextView.OnEditorActionL
 
     private void makeInvoice() {
 
-        for (SubCategoryData subCategoryData : orderedItem) {
-            if (subCategoryData.getChecked()) {
+        for (ItemData subCategoryData : orderedItem) {
+            if (subCategoryData.isChecked()) {
                 subTotalAmount = subTotalAmount + subCategoryData.getQuantity() * 150;
             }
         }

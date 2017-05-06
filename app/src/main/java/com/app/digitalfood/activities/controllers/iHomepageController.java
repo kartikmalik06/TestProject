@@ -11,7 +11,8 @@ import java.util.List;
 public interface IHomepageController {
 
     boolean vailadateUser(String deviceId);
-    void getGridViewData();
-    void setGridViewData(List<BranchType> branchlist);
+    void getBranches();
+    void onResult(List<BranchType> branchlist);
+    void showError(String message);
 
 }

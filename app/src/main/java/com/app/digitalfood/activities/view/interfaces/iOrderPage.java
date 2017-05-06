@@ -12,6 +12,6 @@ import java.util.List;
 public interface iOrderPage {
 
     void setMenuListinAdapter(List<CategoryData> menuList);
-    void setOfferList(List<OfferData> offerList);
+   // void setOfferList(List<OfferData> offerList);
     void setDiscription(boolean expand);
 }

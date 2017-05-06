@@ -6,49 +6,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.app.digitalfood.activities.view.FavouritePage">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <RelativeLayout
-            android:id="@+id/tool_bar_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <include
-            android:id="@+id/tool_bar"
-            layout="@layout/app_bar"
-            >
-
-        </include>
-
-    </RelativeLayout>
-
-        <ListView
-
-            android:id="@+id/address_list"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/tool_bar_layout"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_height="match_parent"
-            >
-
-        </ListView>
-
-        <Button
-            android:id="@+id/add_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="New Address"
-            android:background="@color/Yellow"
-            android:layout_gravity="bottom"
-            android:textSize="@dimen/_15sdp"
-            android:textColor="@color/Black"
-            />
-    </RelativeLayout>
 
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/tool_bar">
+                <include
+                    android:id="@+id/tool_bar"
+                    layout="@layout/app_bar" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/address_list"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/tool_bar"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <Button
+                    android:id="@+id/add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/Yellow"
+                    android:text="New Address"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
     <com.app.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

@@ -5,17 +5,19 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 
 import com.app.digitalfood.DataObject.CategoryGroup;
 import com.app.digitalfood.DataObject.Categoryitem;
-import com.app.digitalfood.DataObject.CategoryData;
+import com.app.digitalfood.DataObject.ItemData;
 import com.app.digitalfood.R;
-import com.app.digitalfood.activities.adapter.ExpandableListBaseAdapter;
+import com.app.digitalfood.activities.adapter.ItemListAdapter;
 import com.app.digitalfood.activities.view.OrderPage;
 
 import java.util.ArrayList;
@@ -28,22 +30,22 @@ import java.util.List;
 
 public class MenuFragment extends Fragment {
 
-    ExpandableListView expandableListView;
-    ExpandableListBaseAdapter expandableListBaseAdapter;
+    RecyclerView listView;
+    ItemListAdapter expandableListBaseAdapter;
     ArrayList<CategoryGroup> listHeader;
     HashMap<CategoryGroup, List<Categoryitem>> listChild;
     private OrderPage orderPage;
-    List<CategoryData> menuList = new ArrayList<>();
+    List<ItemData> itemList = new ArrayList<>();
 
     public MenuFragment() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-    public MenuFragment(OrderPage orderPage, List<CategoryData> menuList) {
+    public MenuFragment(OrderPage orderPage, List<ItemData> itemList) {
         super();
         this.orderPage = orderPage;
-        this.menuList = menuList;
+        this.itemList = itemList;
 
     }
 
@@ -52,12 +54,14 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment, container, false);
 
-        expandableListView = (ExpandableListView) view.findViewById(R.id.food_type);
+        listView = (RecyclerView) view.findViewById(R.id.recycler_view);
         Log.d("string", "yes");
-        expandableListView.setGroupIndicator(null);
-        expandableListBaseAdapter = new ExpandableListBaseAdapter(getContext(), orderPage, menuList);
-        expandableListView.setAdapter(expandableListBaseAdapter);
-
+        expandableListBaseAdapter = new ItemListAdapter(orderPage, itemList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(orderPage);
+        //ViewCompat.setNestedScrollingEnabled(grid,false);
+        listView.setLayoutManager(mLayoutManager);
+        listView.setItemAnimator(new DefaultItemAnimator());
+        listView.setAdapter(expandableListBaseAdapter);
         return view;
     }
 

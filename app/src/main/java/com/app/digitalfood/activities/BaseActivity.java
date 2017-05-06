@@ -3,12 +3,13 @@ package com.app.digitalfood.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,15 +23,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.digitalfood.DataObject.ItemData;
 import com.app.digitalfood.DataObject.LoginResult;
-import com.app.digitalfood.DataObject.SubCategoryData;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.view.ChangePassword;
-import com.app.digitalfood.activities.view.Checkout;
+import com.app.digitalfood.activities.view.DemoCheckOut;
 import com.app.digitalfood.activities.view.FavouritePage;
 import com.app.digitalfood.activities.view.HomePage;
 import com.app.digitalfood.activities.view.MyAddress;
-import com.app.digitalfood.activities.view.OrderPage;
 import com.app.digitalfood.activities.view.ProfilePage;
 import com.app.digitalfood.activities.view.ReviewPage;
 import com.app.digitalfood.component.CustomNavigationView;
@@ -43,8 +43,6 @@ import com.app.digitalfood.database.DatabaseHandler;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by kartik on 24-Feb-17.
@@ -54,20 +52,33 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private CustomNavigationView mCustomNavigationView;
-    private ImageView closeImage;
+    private ImageView closeImage,drawerMenu;
     private Intent intent;
-    static List<SubCategoryData> selectedItem;
+    static List<ItemData> selectedItem;
     private int backPressedCount = 0;
     private TextView toolBarTitle, itemCount;
     private TextView userName, userEmail;
     private Animation animation;
     private Toolbar toolbar;
+    public static String branchID;
     public LoadingView pd;
     private ImageView cartButton;
+    private boolean isDrawerOpen=false;
+    public DatabaseHandler db;
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
+        db=DatabaseHandler.getInstance(this);
+        pd = new LoadingView(this);
+    }
 
     protected void onCreateDrawer() {
         initViews();
-
+        mDrawerLayout.addDrawerListener(this);
+        drawerMenu.setOnClickListener(this);
         setSupportActionBar(toolbar);
         mCustomNavigationView.getMenu().clear();
         mCustomNavigationView.setMenuItem(this);
@@ -167,31 +178,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-       /* if (backPressedCount >= 1) {
-            Log.d("back pressed", String.valueOf(backPressedCount));
-
-            moveTaskToBack(true);
-            System.exit(1);
-        } else {
-            backPressedCount = backPressedCount + 1;
-
-            Log.d("back pressed", String.valueOf(backPressedCount));
-
-            Toast.makeText(this, "Please click BACK again to exit.", Toast.LENGTH_SHORT).show();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    backPressedCount = 0;
-
-                    Log.d("back pressed", String.valueOf(backPressedCount));
-                }
-            }, 3000);
-
-        }*/
         super.onBackPressed();
     }
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setItemCount();
+    }
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
     }
@@ -213,14 +206,23 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             closeImage.setVisibility(View.GONE);
         }
     }
-
+public void disableCart()
+{
+    cartButton.setVisibility(View.INVISIBLE);
+    itemCount.setVisibility(View.GONE);
+}
     public String getDeviceId() {
         @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         return android_id;
     }
+    public static String getBranchID() {
+        return branchID;
+    }
 
+    public static void setBranchID(String branchID) {
+        BaseActivity.branchID = branchID;
+    }
     public void setUserDetail(LoginResult loginResult) {
-
         userName.setText(loginResult.getData().getFirstName() + " " + loginResult.getData().getLastName());
         userEmail.setText(loginResult.getData().getEmail());
     }
@@ -229,22 +231,26 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         button.startAnimation(animation);
     }
 
-    public void addItem(SubCategoryData subCategoryData) {
-        selectedItem.add(subCategoryData);
+    public void addItem(ItemData itemData, String branch_id) {
+        db.addItem(itemData,branch_id);
+       // selectedItem.add(subCategoryData);
         setItemCount();
     }
 
-    public void removeItem(SubCategoryData subCategoryData) {
-        selectedItem.remove(subCategoryData);
-        setItemCount();
+    public void removeItem(ItemData itemData) {
+        if (db.removeItem(itemData.getId())) {
+            //selectedItem.remove(subCategoryData);
+            setItemCount();
+        }
     }
 
-    private void setItemCount() {
-        if (selectedItem.size() <= 0) {
+    public void setItemCount() {
+       if (branchID!=null)
+        if ( db.getItemCount(branchID) <= 0) {
             itemCount.setVisibility(View.GONE);
         } else {
             itemCount.setVisibility(View.VISIBLE);
-            itemCount.setText(String.valueOf(selectedItem.size()));
+            itemCount.setText(String.valueOf(db.getItemCount(branchID)));
         }
     }
 
@@ -253,16 +259,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         switch (v.getId()) {
 
             case R.id.cart:
-                if (selectedItem.size() > 0) {
+                if (db.getItemCount(branchID) > 0) {
                     pd.showDialog();
-                    List<SubCategoryData> itemInCart = new ArrayList<>();
-                    for (SubCategoryData subCategoryData : selectedItem) {
-                        if (subCategoryData.getChecked()) {
-                            itemInCart.add(subCategoryData);
-                        }
-                    }
-                    Intent intent = new Intent(getApplicationContext(), Checkout.class);
-                    intent.putExtra("OrderedItem", (Serializable) itemInCart);
+                    Intent intent = new Intent(getApplicationContext(), DemoCheckOut.class);
+                   intent.putExtra("OrderedItem", (Serializable) db.getAllItem(branchID));
                     pd.hideDialog();
                     startActivity(intent);
                 } else {
@@ -273,6 +273,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 mDrawerLayout.closeDrawer(mCustomNavigationView);
                 closeImage.setVisibility(View.GONE);
                 break;
+
+            case R.id.drawer_menu:
+                if (isDrawerOpen)
+                {
+                    mDrawerLayout.closeDrawer(mCustomNavigationView);
+                }
+                else
+                {
+                     mDrawerLayout.openDrawer(mCustomNavigationView);
+                }
+               isDrawerOpen=!isDrawerOpen;
+                break;
         }
     }
 
@@ -281,6 +293,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mCustomNavigationView = (CustomNavigationView) findViewById(R.id.navigation_view);
+        drawerMenu=(ImageView) findViewById(R.id.drawer_menu);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         closeImage = (ImageView) findViewById(R.id.im_close);
         toolBarTitle = (TextView) findViewById(R.id.title_name);
@@ -289,8 +302,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         userName = (TextView) findViewById(R.id.user_name);
         selectedItem = new ArrayList<>();
         cartButton = (ImageView) findViewById(R.id.cart);
-        animation = new AnimationUtils().loadAnimation(this, R.anim.alpha);
-        pd = new LoadingView(this);
-        mDrawerLayout.addDrawerListener(this);
+
+
     }
 }

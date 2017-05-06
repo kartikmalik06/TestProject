@@ -76,7 +76,7 @@ public class ModalOrderPage implements IModalOrderPage {
 
     @Override
     public void offerlist(String branch_id) {
-        Call<OfferResult> call=service.getOfferList(branch_id);
+       /* Call<OfferResult> call=service.getOfferList(branch_id);
         call.enqueue(new Callback<OfferResult>() {
             @Override
             public void onResponse(Call<OfferResult> call, Response<OfferResult> response) {
@@ -91,6 +91,6 @@ public class ModalOrderPage implements IModalOrderPage {
             public void onFailure(Call<OfferResult> call, Throwable t) {
 
             }
-        });
+        });*/
     }
 }

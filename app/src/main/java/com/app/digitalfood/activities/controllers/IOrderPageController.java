@@ -15,6 +15,6 @@ public interface IOrderPageController {
     void getMenuCategories(String branch_id);
     void setMenuList(List<CategoryData> menuList);
 
-    void getOffers(String branchId);
-    void setOffers(List<OfferData> offerDatas);
+   // void getOffers(String branchId);
+  //  void setOffers(List<OfferData> offerDatas);
 }

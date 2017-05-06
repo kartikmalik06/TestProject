@@ -9,15 +9,23 @@
     android:fitsSystemWindows="true"
     >
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   <!-- <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".activities.view.HomePage">
+        tools:context=".activities.view.HomePage">-->
+<RelativeLayout
+    android:layout_width="match_parent"
 
-        <android.support.design.widget.AppBarLayout
+    android:layout_height="match_parent">
+
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/app_bar"/>
+      <!--  <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="192dp"
             android:fitsSystemWindows="true"
@@ -43,110 +51,107 @@
 
 
             </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
+        </android.support.design.widget.AppBarLayout>-->
 
-        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+       <!-- <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/tool_bar"
             android:fillViewport="true"
-            android:padding="@dimen/_10sdp"
+
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+           <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:weightSum="1">
+               <!--     <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:paddingBottom="@dimen/_5sdp"
+                       android:weightSum="1">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:text="Zummaline"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_20sdp" />
+                       <TextView
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="0.6"
+                           android:paddingLeft="@dimen/_5sdp"
+                           android:text="Zummaline"
+                           android:textColor="@color/Black"
+                           android:textSize="@dimen/_20sdp" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="0.4"
-                        android:gravity="right"
-                        android:orientation="horizontal"
-                        android:paddingRight="@dimen/_7sdp">
+                       <LinearLayout
+                           android:layout_width="0dp"
+                           android:layout_height="fill_parent"
+                           android:layout_weight="0.4"
+                           android:gravity="right"
+                           android:orientation="horizontal"
+                           android:paddingRight="@dimen/_7sdp">
 
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:src="@drawable/icon_star" />
+                           <ImageView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="0.2"
+                               android:src="@drawable/icon_star" />
 
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:src="@drawable/icon_star" />
+                           <ImageView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="0.2"
+                               android:src="@drawable/icon_star" />
 
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:src="@drawable/icon_star" />
+                           <ImageView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="0.2"
+                               android:src="@drawable/icon_star" />
 
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:src="@drawable/icon_star" />
+                           <ImageView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="0.2"
+                               android:src="@drawable/icon_star" />
 
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:src="@drawable/icon_star" />
-                    </LinearLayout>
+                           <ImageView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="0.2"
+                               android:src="@drawable/icon_star" />
+                       </LinearLayout>
 
-                </LinearLayout>
+                   </LinearLayout>
 
-                <TextView
-                    android:id="@+id/discription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    android:clickable="true"
-                    android:paddingBottom="@dimen/_1sdp"
-                    android:paddingLeft="@dimen/_7sdp"
-                    android:paddingRight="@dimen/_7sdp"
-                    android:paddingTop="@dimen/_1sdp"
-                    android:text="Restaurants range from inexpensive and informal lunching or dining places catering to people working nearby, with modest food served in simple settings at low prices, to expensive establishments serving refined food and fine wines in a formal setting"
-                    android:textSize="@dimen/_13sdp" />
+                   <TextView
+                       android:id="@+id/discription"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginBottom="@dimen/_15sdp"
+                       android:clickable="true"
+                       android:paddingBottom="@dimen/_1sdp"
+                       android:paddingLeft="@dimen/_7sdp"
+                       android:paddingRight="@dimen/_7sdp"
+                       android:paddingTop="@dimen/_1sdp"
+                       android:text="Restaurants range from inexpensive and informal lunching or dining places catering to people working nearby, with modest food served in simple settings at low prices, to expensive establishments serving refined food and fine wines in a formal setting"
+                       android:textSize="@dimen/_13sdp" />-->
 
-
-                <GridView
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/grid"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:columnWidth="@dimen/_100sdp"
-                    android:gravity="center"
-                    android:numColumns="3"
-                    android:stretchMode="columnWidth">
-
-                </GridView>
-
+                    android:layout_below="@+id/tool_bar"
+                    android:layout_height="wrap_content"
+                   >
+                </android.support.v7.widget.RecyclerView>
+<!--
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>-->
+</RelativeLayout>
 
-
-    </android.support.design.widget.CoordinatorLayout>
+  <!--  </android.support.design.widget.CoordinatorLayout>-->
 
     <com.app.digitalfood.component.CustomNavigationView
         android:id="@+id/navigation_view"

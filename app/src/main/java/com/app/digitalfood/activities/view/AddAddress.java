@@ -24,6 +24,7 @@ public class AddAddress extends BaseActivity implements iAddAddress, View.OnClic
     int id = 10;
     int userID = 43;
     boolean isEditable = false;
+    int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,15 @@ public class AddAddress extends BaseActivity implements iAddAddress, View.OnClic
         initViews();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            isEditable = true;
-            Address address = (Address) bundle.getSerializable("AddressToEdit");
-            setPreviousDetailstoEdit(address);
+
+            i = bundle.getInt("placeorder", 0);
+            if (i != 101) {
+                isEditable = true;
+                Address address = (Address) bundle.getSerializable("AddressToEdit");
+                setPreviousDetailstoEdit(address);
+            }
         }
         addAddressController = new AddAddressController(this);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.setActionBarTitle("Address");
         submitButton.setOnClickListener(this);
     }
@@ -61,18 +64,28 @@ public class AddAddress extends BaseActivity implements iAddAddress, View.OnClic
             case R.id.btn_proceed: {
 
                 if (!isEditable) {
-                    Log.d("add address","clicked");
+                    Log.d("add address", "clicked");
                     if (userName.isFieldEmpty() && userAddress.isFieldEmpty() && userCity.isFieldEmpty() && userPhone.isFieldEmpty() && userPostalCode.isFieldEmpty()) {
                         pd.showDialog();
                         addAddressController.addAddress(userID, userName.getText().toString(), userAddress.getText().toString(), userPhone.getText().toString());
                     }
                 } else {
-                    Log.d("update address","clicked");
+                    Log.d("update address", "clicked");
                     isEditable = false;
                     if (userName.isFieldEmpty() && userAddress.isFieldEmpty() && userCity.isFieldEmpty() && userPhone.isFieldEmpty() && userPostalCode.isFieldEmpty()) {
                         pd.showDialog();
                         addAddressController.updateAddress(id, userID, userName.getText().toString(), userAddress.getText().toString(), userPhone.getText().toString());
-
+                        if (i==101)
+                        {
+                            Intent intent=new Intent();
+                            intent.putExtra("name",userName.getText().toString());
+                            intent.putExtra("address",userAddress.getText().toString());
+                            intent.putExtra("city",userCity.getText().toString());
+                            intent.putExtra("phone",userPhone.getText().toString());
+                            intent.putExtra("postcode",userPostalCode.getText().toString());
+                            setResult(2,intent);
+                            finish();
+                        }
                     }
                 }
                 break;

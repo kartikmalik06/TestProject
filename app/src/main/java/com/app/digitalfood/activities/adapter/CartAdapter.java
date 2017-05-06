@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.app.digitalfood.DataObject.SubCategoryData;
+import com.app.digitalfood.DataObject.ItemData;
 import com.app.digitalfood.activities.view.fragment.PaymentDetails;
 import com.app.digitalfood.activities.view.fragment.ShippingFragment;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 
 public class CartAdapter extends FragmentStatePagerAdapter {
-    List<SubCategoryData> orderedItem;
+    List<ItemData> orderedItem;
     private HashMap<Integer, Fragment> fragmentHashMap = new HashMap<>();
-    public CartAdapter(FragmentManager fm, List<SubCategoryData> orderedItem) {
+    public CartAdapter(FragmentManager fm, List<ItemData> orderedItem) {
         super(fm);
         this.orderedItem=orderedItem;
     }

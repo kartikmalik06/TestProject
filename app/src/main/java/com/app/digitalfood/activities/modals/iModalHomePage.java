@@ -6,5 +6,5 @@ package com.app.digitalfood.activities.modals;
 
 public interface iModalHomePage {
 
-    void getRestaurentList();
+    void getBranchesFromDB();
 }

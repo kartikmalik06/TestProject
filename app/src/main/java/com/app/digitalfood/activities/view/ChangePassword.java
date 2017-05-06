@@ -20,9 +20,7 @@ public class ChangePassword extends BaseActivity implements iChangePassword, Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         super.onCreateDrawer();
-        //must call before setDisplayHomeAsUpEnabled function
         super.setActionBarTitle("CHANGE PASSWORD");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         oldPassword = (CustomEditText) findViewById(R.id.old_password);
         newPassword = (CustomEditText) findViewById(R.id.new_password);
         confirmPassword = (CustomEditText) findViewById(R.id.confirm_password);
@@ -33,15 +31,16 @@ public class ChangePassword extends BaseActivity implements iChangePassword, Vie
 
     @Override
     public void onClick(View v) {
-        super.buttonAnimation(chnagePassword);
-        if (oldPassword.isFieldEmpty() && newPassword.isFieldEmpty() && confirmPassword.isFieldEmpty()) {
-            if (newPassword.getText().toString().equals(confirmPassword.getText().toString())) {
-                //need to add server call
-                Toast.makeText(this, "PASSWORD CHANGED", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(this, "NEW PASSWORD DOES NOT MATCH.", Toast.LENGTH_SHORT).show();
+        super.onClick(v);
+        if (v.getId() == R.id.change_password) {
+            super.buttonAnimation(chnagePassword);
+            if (oldPassword.isFieldEmpty() && newPassword.isFieldEmpty() && confirmPassword.isFieldEmpty()) {
+                if (newPassword.getText().toString().equals(confirmPassword.getText().toString())) {
+                    //need to add server call
+                    Toast.makeText(this, "PASSWORD CHANGED", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "NEW PASSWORD DOES NOT MATCH.", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

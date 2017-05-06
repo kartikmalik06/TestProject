@@ -5,15 +5,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.digitalfood.DataObject.BranchType;
 import com.app.digitalfood.R;
@@ -22,10 +25,8 @@ import com.app.digitalfood.activities.adapter.CustomGrid;
 import com.app.digitalfood.activities.controllers.HomePageController;
 import com.app.digitalfood.activities.controllers.IHomepageController;
 import com.app.digitalfood.activities.view.interfaces.iHomePage;
-import com.app.digitalfood.component.CustomEditText;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -36,8 +37,9 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
     private IHomepageController iHomepageController;
     private TextView userName, userEmail, discription;
     ImageView userProfile;
-    private GridView grid;
+    private RecyclerView grid;
     boolean expand=true;
+    int comapnyID=6;
     String demoText="Restaurants range from inexpensive and informal lunching or dining places catering to people working nearby, with modest food served in simple settings at low prices, to expensive establishments serving refined food and fine wines in a formal setting";
     private List<BranchType> listBranch = new ArrayList<BranchType>();
 
@@ -49,26 +51,25 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
         setContentView(R.layout.activity_home_page);
         super.onCreateDrawer();
         //DatabaseHandler databaseHandler=new DatabaseHandler(this);
-
+        disableCart();
         userName = (TextView) findViewById(R.id.user_name);
         userEmail = (TextView) findViewById(R.id.user_email);
         userProfile = (ImageView) findViewById(R.id.userProfile);
 
-        discription = (TextView) findViewById(R.id.discription);
+        //discription = (TextView) findViewById(R.id.discription);
 
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+     /*   CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);*/
 
         super.setActionBarTitle("Home Page");
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iHomepageController = new HomePageController(this);
 
         setDiscription(expand);
 
         //  checkDeviceid(getDeviceId());
-        if (true) {
+        if (isLogin()) {
             pd.showDialog();
-            iHomepageController.getGridViewData();
+            Log.d("Fetching:"," Start");
+            iHomepageController.getBranches();
             if (listBranch.size() != 0) {
                 initGridView();
             }
@@ -77,11 +78,11 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
             startActivity(intent);
 
         }
-      discription.setOnClickListener(this);
+//      discription.setOnClickListener(this);
     }
 
     @Override
-    public void setBranchList(List<BranchType> listBranch) {
+    public void onReceiveBranches(List<BranchType> listBranch) {
         this.listBranch = listBranch;
         initGridView();
     }
@@ -99,21 +100,13 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
 
     public void initGridView() {
         CustomGrid adapter = new CustomGrid(this, listBranch);
-        grid = (GridView) findViewById(R.id.grid);
+        grid = (RecyclerView) findViewById(R.id.grid);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        //ViewCompat.setNestedScrollingEnabled(grid,false);
+        grid.setLayoutManager(mLayoutManager);
+        grid.setItemAnimator(new DefaultItemAnimator());
         grid.setAdapter(adapter);
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
-                Bundle b = new Bundle();
-                // b.putString("branch_id", String.valueOf(listBranch.get(position).getId()));
-                intent.putExtra("branch_id", String.valueOf(listBranch.get(position).getId()));
-                startActivity(intent);
-
-            }
-        });
         pd.hideDialog();
     }
 
@@ -128,7 +121,7 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
    @Override
    public void setDiscription(boolean expand)
     {
-        if (expand)
+       /* if (expand)
         {
             if (discription.getText().length() > 150) {
                 String text = discription.getText().toString().substring(0, 80) + "...";
@@ -140,7 +133,14 @@ public class HomePage extends BaseActivity implements iHomePage, View.OnClickLis
         {
             discription.setText(demoText);
             this.expand=true;
-        }
+        }*/
     }
+
+    @Override
+    public void showToast(String message) {
+        pd.hideDialog();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }
 

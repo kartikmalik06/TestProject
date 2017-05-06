@@ -3,13 +3,9 @@ package com.app.digitalfood.activities.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.LinearLayout;
 
 import com.app.digitalfood.DataObject.Address;
-import com.app.digitalfood.DataObject.SubCategoryData;
+import com.app.digitalfood.DataObject.ItemData;
 import com.app.digitalfood.R;
 import com.app.digitalfood.activities.BaseActivity;
 import com.app.digitalfood.activities.adapter.CartAdapter;
@@ -25,27 +21,25 @@ import java.util.List;
  */
 
 public class Checkout extends BaseActivity implements iCart {
-    List<SubCategoryData> orderedItem = new ArrayList<>();
+    List<ItemData> orderedItem = new ArrayList<>();
     private TabLayout tabLayout;
     private SwipableViewPager mViewPager;
-    Address shippingAddress = new Address();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_out);
         super.onCreateDrawer();
-        Bundle b = getIntent().getExtras();
+      /*  Bundle b = getIntent().getExtras();
         if (b != null) {
-            orderedItem = (List<SubCategoryData>) b.getSerializable("OrderedItem");
-        }
+            orderedItem = (List<ItemData>) b.getSerializable("OrderedItem");
+        }*/
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager = (SwipableViewPager) findViewById(R.id.view_pager);
         mViewPager.setPagingEnabled(false);
         CartAdapter cartAdapter = new CartAdapter(getSupportFragmentManager(), orderedItem);
         super.setActionBarTitle("Checkout");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mViewPager.setAdapter(cartAdapter);
         tabLayout.setupWithViewPager(mViewPager);
     }

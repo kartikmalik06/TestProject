@@ -128,6 +128,9 @@ public class LoginPage extends BaseActivity implements View.OnClickListener, iLo
             //Calling a new function to handle signin
             handleSignInResult(result);
             Toast.makeText(this, result.getSignInAccount().getDisplayName(), Toast.LENGTH_SHORT).show();
+            super.updateLoginStatus(true);
+            Intent intent=new Intent(this, HomePage.class);
+            startActivity(intent);
         } else if (requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
             Log.d("fb","onactivity result");
             callbackManager.onActivityResult(requestCode, resultCode, data);
