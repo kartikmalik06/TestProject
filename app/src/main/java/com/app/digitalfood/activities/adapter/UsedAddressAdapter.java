@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -19,9 +20,11 @@ import java.util.List;
  * Created by beyond on 13-Apr-17.
  */
 
-public class UsedAddressAdapter extends RecyclerView.Adapter<UsedAddressAdapter.MyViewHolder> implements View.OnClickListener {
+public class UsedAddressAdapter extends RecyclerView.Adapter<UsedAddressAdapter.MyViewHolder> {
     private List<Address> addresses;
     private Context context;
+    boolean selected;
+    int checkedPosition=-1;
 
     public UsedAddressAdapter(Context context, List<Address> addresses) {
         this.context = context;
@@ -37,14 +40,21 @@ public class UsedAddressAdapter extends RecyclerView.Adapter<UsedAddressAdapter.
     }
 
     @Override
-    public void onBindViewHolder(UsedAddressAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final UsedAddressAdapter.MyViewHolder holder, final int position) {
         Address address = getItem(position);
-        holder.userName.setText(getValues(address.getName()));
+
         holder.userAddress.setText(getValues(address.getAddress1()) + getValues(address.getAddress2()));
-        holder.userCity.setText(getValues(address.getCity()) + getValues(address.getState()) + getValues(address.getCountry()) + getValues(address.getPostcode()));
+        /*holder.userCity.setText(getValues(address.getCity()) + getValues(address.getState()) + getValues(address.getCountry()) + getValues(address.getPostcode()));
         holder.userPhone.setText(getValues(String.valueOf(address.getMobile())));
-        holder.options.setTag(position);
-        holder.options.setOnClickListener(this);
+        holder.userName.setText(getValues(address.getName()));*/
+        holder.options.setImageResource(position == checkedPosition ? R.drawable.checked : R.drawable.circumference);
+        holder.address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkedPosition = position;
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -65,22 +75,20 @@ public class UsedAddressAdapter extends RecyclerView.Adapter<UsedAddressAdapter.
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView userName, userAddress, userCity, userPhone;
-        public RadioButton options;
+        public TextView /*userName,*/ userAddress/*, userCity, userPhone*/;
+        public ImageView options;
+        public LinearLayout address;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            userName = (TextView) itemView.findViewById(R.id.name_text);
             userAddress = (TextView) itemView.findViewById(R.id.address_text);
+           /* userName = (TextView) itemView.findViewById(R.id.name_text);
             userCity = (TextView) itemView.findViewById(R.id.city_text);
-            userPhone = (TextView) itemView.findViewById(R.id.phone_text);
-            options = (RadioButton) itemView.findViewById(R.id.selectedaddress);
+            userPhone = (TextView) itemView.findViewById(R.id.phone_text);*/
+            options = (ImageView) itemView.findViewById(R.id.selectedaddress);
+            address = (LinearLayout) itemView.findViewById(R.id.address);
         }
     }
 }

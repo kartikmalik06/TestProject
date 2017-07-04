@@ -4,25 +4,23 @@ import android.util.Log;
 
 import com.app.digitalfood.DataObject.CategoryResult;
 import com.app.digitalfood.activities.controllers.ICategoryMenuController;
-import com.app.digitalfood.activities.controllers.IOrderPageController;
 import com.app.digitalfood.network.ApiService;
 import com.app.digitalfood.network.ServiceGenerator;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Created by beyond on 01-Jun-17.
+ * Created by beyond on 29-Mar-17.
  */
 
-public class ModalOrderPage implements IModalOrderPage {
-    private IOrderPageController orderPageController;
+public class ModalCategoryMenu implements IModalCategoryMenu {
+    private ICategoryMenuController categoryMenuController;
     private ApiService service;
 
-    public ModalOrderPage(IOrderPageController orderPageController) {
-        this.orderPageController = orderPageController;
+    public ModalCategoryMenu(ICategoryMenuController orderPageController) {
+        this.categoryMenuController = orderPageController;
         Retrofit retrofit = ServiceGenerator.getService();
         service = retrofit.create(ApiService.class);
     }
@@ -37,7 +35,7 @@ public class ModalOrderPage implements IModalOrderPage {
                 if (response.isSuccessful())
                     if (response.body().getStatus()==1)
                     {  Log.d("State","Result()");
-                        orderPageController.setMenuList(response.body().getData());
+                        categoryMenuController.setMenuList(response.body().getData());
                     }
             }
 

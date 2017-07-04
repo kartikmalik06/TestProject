@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.app.digitalfood.activities.view.CategoryMenu;
+
 /**
  * Created by beyond on 23-Feb-17.
  */
@@ -37,5 +39,7 @@ public class SwipableViewPager extends ViewPager {
     public void setPagingEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+
 
 }

@@ -16,4 +16,6 @@ public interface iLogin {
     void setFbUserData(JSONObject userData);
 
     void setUserData(LoginResult loginResult);
+
+    void onSuccess();
 }

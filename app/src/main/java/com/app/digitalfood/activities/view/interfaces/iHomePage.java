@@ -15,7 +15,6 @@ public interface iHomePage {
 
     void onReceiveBranches(List<BranchType> listBranch);
 
-    void setDiscription(boolean expand);
 
     void showToast(String message);
 }

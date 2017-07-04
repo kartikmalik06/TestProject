@@ -24,7 +24,6 @@ public class LoginController implements iLoginController {
 
     @Override
     public void login(String userName, String password, String deviceId, String deviceType) {
-
         modalLogin.authanticateUser(userName, password, deviceId, deviceType);
     }
 
@@ -34,5 +33,6 @@ public class LoginController implements iLoginController {
         DatabaseHandler databaseHandler = new DatabaseHandler((Context) iLogin);
         databaseHandler.addUserInfo(loginData.getId(), loginData.getFirstName(), loginData.getEmail(), loginData.getMobile(), true);
         // iLogin.setUserData(loginResult);
+        iLogin.onSuccess();
     }
 }

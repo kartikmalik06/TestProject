@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/address"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/address_box"
-    android:layout_margin="@dimen/_10sdp"
+    android:padding="@dimen/_5sdp"
     android:orientation="horizontal"
     android:weightSum="1">
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.12"
         android:weightSum="1"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/_15sdp"
         android:paddingLeft="@dimen/_5sdp"
         android:orientation="vertical"
         >
 
-       <RadioButton
+       &lt;!&ndash;<RadioButton
            android:id="@+id/selectedaddress"
            android:layout_width="match_parent"
            android:layout_height="0dp"
            android:layout_weight="0.2"
 
-           />
+           />&ndash;&gt;
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -30,6 +31,7 @@
             />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,9 +75,28 @@
             android:textSize="@dimen/_17sdp" />
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 
-
+    <ImageView
+        android:id="@+id/selectedaddress"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:padding="@dimen/_2sdp"
+        android:src="@drawable/circumference"
+        android:layout_weight="0.15"
+        />
+    <com.app.digitalfood.component.OpenSansRegularTextView
+        android:id="@+id/address_text"
+        android:layout_width="0dp"
+        android:layout_weight="0.85"
+        android:layout_height="wrap_content"
+        android:gravity="fill_horizontal"
+        android:padding="@dimen/_5sdp"
+        android:text="main market,ShriKrishna Govind Colony, keshorai patan"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/_12sdp" />
 </LinearLayout>
 
 
